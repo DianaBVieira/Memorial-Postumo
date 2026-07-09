@@ -1066,7 +1066,12 @@ body.adm-editing .welcome-overlay .adm-hero-upload{
 
   // Sincroniza velas acesas por QUALQUER visitante (inclusive as de antes,
   // ao carregar a página) e novas velas chegando em tempo real de outras pessoas.
-  if(window.SiteConfigDB){
+  // OBS: isto precisa rodar depois que o script do Firebase (type="module",
+  // que carrega de forma adiada) já tiver criado o window.SiteConfigDB — por
+  // isso a inscrição fica dentro de uma função chamada a partir do init(),
+  // e não solta no nível superior do script (que roda cedo demais).
+  function syncCandlesFromFirestore(){
+    if(!window.SiteConfigDB) return;
     window.SiteConfigDB.onUpdate(function(){
       const arr = window.SiteConfigDB.get('candles', []);
       arr.forEach(function(entry){
@@ -1185,6 +1190,20 @@ body.adm-editing .welcome-overlay .adm-hero-upload{
 
   // INIT — DOMContentLoaded logic
   function init(){
+    // Registra a sincronização de velas salvas no Firestore. Se o Firebase
+    // ainda não tiver terminado de carregar neste exato instante (window.SiteConfigDB
+    // indefinido), tenta de novo em seguida — isso cobre casos raros de conexão lenta.
+    if(window.SiteConfigDB){
+      syncCandlesFromFirestore();
+    } else {
+      const waitForDB = setInterval(function(){
+        if(window.SiteConfigDB){
+          clearInterval(waitForDB);
+          syncCandlesFromFirestore();
+        }
+      }, 50);
+    }
+
     // a) PRIMEIRA vela também tenta ser a vela-vídeo (mesmo fallback
     // automático das demais: se o vídeo falhar, ela vira CSS sozinha).
     const firstCandle = createVideoCandle('Elena');
