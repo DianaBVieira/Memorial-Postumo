@@ -23,9 +23,16 @@
     measurementId: "G-3L4EBC2XF6"
   };
 
+  // ===== ID DO CLIENTE =====
+  // Ao entregar este site para uma pessoa/família diferente, troque APENAS
+  // este valor por um identificador único (ex: 'joao-silva', 'familia-costa').
+  // Isso mantém os dados de cada cliente separados dentro do MESMO projeto
+  // Firebase — sem precisar criar um banco de dados novo a cada venda.
+  const CLIENT_ID = 'maria-da-conceicao';
+
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
-  const configRef = doc(db, 'site', 'config');
+  const configRef = doc(db, 'clients', CLIENT_ID);
 
   // API global simples usada pelo resto do site (scripts normais, não-módulo)
   // para ler/escrever dados que ficam sincronizados em tempo real via Firestore
