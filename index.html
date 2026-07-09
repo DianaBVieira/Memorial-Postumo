@@ -827,6 +827,10 @@ body.adm-editing .welcome-overlay .adm-hero-upload{
     <div class="divider"></div>
   </div>
 
+  <p style="text-align:center;color:var(--gold-soft);font-family:'Cormorant Garamond',serif;font-size:1.05rem;letter-spacing:0.5px;margin:-10px 0 24px;">
+    <span id="candleCount" style="color:var(--gold);font-weight:600;">0</span> velas acesas em memória
+  </p>
+
   <div class="candles-grid" id="candlesGrid" aria-label="Velas acesas"></div>
 
   <div class="candle-input-wrap">
@@ -1020,6 +1024,7 @@ body.adm-editing .welcome-overlay .adm-hero-upload{
 
   function animateCounter(){
     const el = document.getElementById('candleCount');
+    if(!el) return; // elemento opcional; se não existir, apenas ignora a animação
     const target = candleCount;
     const start = parseInt(el.textContent) || 0;
     if(start === target) return;
