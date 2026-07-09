@@ -1,0 +1,2009 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eternal Memory — In Memoriam de Elena Marquette</title>
+<meta name="description" content="Memorial eterno em homenagem a Elena Marquette. Acenda uma vela e deixe sua mensagem.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+:root{
+  --bg:#070707;
+  --bg-soft:#0e0e0e;
+  --gold:#D6B16A;
+  --gold-soft:#b8965a;
+  --cream:#f4ead6;
+  --muted:#9a9a9a;
+  --glass:rgba(255,255,255,0.04);
+  --glass-border:rgba(214,177,106,0.25);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg);
+  color:var(--cream);
+  font-family:'Montserrat',sans-serif;
+  line-height:1.7;
+  overflow-x:hidden;
+}
+h1,h2,h3{font-family:'Playfair Display',serif;}
+.subtitle{font-family:'Cormorant Garamond',serif;font-style:italic;}
+a{color:inherit;text-decoration:none;}
+img{max-width:100%;display:block;}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px;}
+
+/* NAVBAR */
+.navbar{
+  position:fixed;top:0;left:0;width:100%;z-index:1000;
+  padding:18px 40px;display:flex;align-items:center;justify-content:space-between;
+  background:rgba(7,7,7,0.35);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid transparent;transition:all .4s ease;
+}
+.navbar.scrolled{background:rgba(7,7,7,0.85);border-bottom:1px solid var(--glass-border);padding:12px 40px;}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--gold);letter-spacing:1px;display:inline-flex;align-items:center;gap:10px;}
+.nav-logo span{color:var(--cream);}
+.nav-logo-img{height:34px;width:auto;object-fit:contain;display:none;}
+.nav-logo-img.has-logo{display:inline-block;}
+.adm-logo-upload{display:none;margin-left:8px;width:28px;height:28px;border-radius:50%;align-items:center;justify-content:center;border:1px solid var(--gold);color:var(--gold);font-size:.72rem;cursor:pointer;background:transparent;transition:.3s;vertical-align:middle;}
+body.adm-editing .adm-logo-upload{display:inline-flex;}
+.adm-logo-upload:hover{background:var(--gold);color:var(--bg);}
+.nav-links{display:flex;gap:30px;list-style:none;}
+.nav-links a{font-size:.85rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--cream);opacity:.8;transition:.3s;position:relative;}
+.nav-links a:hover{color:var(--gold);opacity:1;}
+.nav-links a::after{content:'';position:absolute;bottom:-6px;left:0;width:0;height:1px;background:var(--gold);transition:width .3s;}
+.nav-links a:hover::after{width:100%;}
+.hamburger{display:none;background:none;border:none;color:var(--gold);font-size:1.6rem;cursor:pointer;}
+
+/* HERO */
+.hero{
+  position:relative;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  overflow:hidden;
+  isolation:isolate;
+}
+.hero::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background-image:url('https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?w=1920&q=80');
+  background-size:cover;
+  background-position:center;
+  filter:brightness(0.3);
+  z-index:-2;
+}
+.hero::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:radial-gradient(ellipse at center, rgba(7,7,7,0.4) 0%, rgba(7,7,7,0.85) 70%, rgba(0,0,0,0.95) 100%);
+  z-index:-1;
+}
+.hero-edge-glow{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:1;
+  animation:heroEdgeGlow 5s ease-in-out infinite alternate;
+}
+@keyframes heroEdgeGlow{
+  0%{
+    box-shadow:inset 0 0 80px 20px rgba(214,177,106,0.15),
+               inset 0 0 160px 40px rgba(214,177,106,0.05);
+  }
+  100%{
+    box-shadow:inset 0 0 140px 40px rgba(214,177,106,0.35),
+               inset 0 0 240px 80px rgba(214,177,106,0.12);
+  }
+}
+.hero-content{
+  position:relative;
+  z-index:2;
+  padding:2rem;
+  max-width:800px;
+}
+.hero-eyebrow{
+  font-family:'Montserrat',sans-serif;
+  font-size:.9rem;
+  letter-spacing:6px;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:1.5rem;
+  opacity:0;
+  animation:fadeUp 1.2s ease .3s forwards;
+}
+.hero-title{
+  font-size:clamp(2.5rem, 6vw, 5rem);
+  font-weight:400;
+  color:var(--cream);
+  margin-bottom:1rem;
+  letter-spacing:2px;
+  opacity:0;
+  animation:fadeUp 1.4s ease .6s forwards;
+}
+.hero-title em{
+  color:var(--gold);
+  font-style:italic;
+}
+.hero-dates{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.2rem;
+  color:var(--gold);
+  letter-spacing:3px;
+  margin-bottom:2rem;
+  opacity:0;
+  animation:fadeUp 1.4s ease .9s forwards;
+}
+.hero-quote{
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;
+  font-size:1.3rem;
+  color:var(--muted);
+  max-width:600px;
+  margin:0 auto;
+  opacity:0;
+  animation:fadeUp 1.4s ease 1.2s forwards;
+}
+.hero-scroll{
+  position:absolute;
+  bottom:2rem;
+  left:50%;
+  transform:translateX(-50%);
+  color:var(--gold);
+  font-size:.8rem;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  z-index:2;
+  animation:bounce 2s infinite;
+}
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(30px);}
+  to{opacity:1;transform:translateY(0);}
+}
+@keyframes bounce{
+  0%,100%{transform:translateX(-50%) translateY(0);}
+  50%{transform:translateX(-50%) translateY(10px);}
+}
+.btn{
+  display:inline-block;padding:14px 34px;border:1px solid var(--gold);color:var(--gold);
+  font-size:.8rem;letter-spacing:2px;text-transform:uppercase;cursor:pointer;
+  background:transparent;transition:.4s;font-family:'Montserrat',sans-serif;
+}
+.btn:hover{background:var(--gold);color:var(--bg);box-shadow:0 0 25px rgba(214,177,106,0.4);}
+
+/* SECTIONS */
+section{padding:100px 40px;max-width:1200px;margin:0 auto;}
+.section-title{text-align:center;margin-bottom:60px;}
+.section-title h2{font-size:2.6rem;color:var(--cream);margin-bottom:10px;}
+.section-title .subtitle{font-size:1.2rem;color:var(--gold);}
+.divider{width:80px;height:1px;background:var(--gold);margin:20px auto 0;}
+
+/* BIOGRAFIA — CARD ÚNICO */
+.bio-single-wrap{position:relative;max-width:820px;margin:0 auto;display:flex;flex-direction:column;align-items:center;}
+
+.bio-connector-top{display:flex;flex-direction:column;align-items:center;height:70px;}
+.bio-connector-top::before{
+  content:'';width:2px;flex:1;
+  background:linear-gradient(180deg,transparent,var(--gold));
+  transform:scaleY(0);transform-origin:top;
+  transition:transform 1s ease .1s;
+}
+.bio-single-wrap.reveal .bio-connector-top::before{transform:scaleY(1);}
+
+.bio-dot{
+  width:14px;height:14px;border-radius:50%;background:var(--gold);
+  box-shadow:0 0 12px rgba(214,177,106,0.6);
+  transform:scale(0);opacity:0;
+  transition:transform .5s cubic-bezier(.34,1.56,.64,1),opacity .5s ease;
+  animation:dotPulse 3s ease-in-out infinite;
+}
+.bio-single-wrap.reveal .bio-connector-top .bio-dot{transform:scale(1);opacity:1;transition-delay:1s;}
+.bio-single-wrap.reveal .bio-connector-bottom .bio-dot{transform:scale(1);opacity:1;transition-delay:.3s;}
+@keyframes dotPulse{
+  0%,100%{box-shadow:0 0 12px rgba(214,177,106,0.6);}
+  50%{box-shadow:0 0 22px 6px rgba(214,177,106,0.9);}
+}
+
+.bio-connector-bottom{display:flex;flex-direction:column;align-items:center;height:70px;}
+.bio-connector-bottom::after{
+  content:'';width:2px;flex:1;
+  background:linear-gradient(180deg,var(--gold),transparent);
+  transform:scaleY(0);transform-origin:top;
+  transition:transform 1s ease .5s;
+}
+.bio-single-wrap.reveal .bio-connector-bottom::after{transform:scaleY(1);}
+
+.bio-card{
+  width:100%;background:var(--glass);border:1px solid var(--glass-border);border-radius:10px;
+  backdrop-filter:blur(6px);padding:35px;margin:6px 0;
+  display:grid;grid-template-columns:220px 1fr;gap:35px;align-items:center;
+  opacity:0;transform:translateY(30px);transition:opacity .8s ease .4s,transform .8s ease .4s;
+}
+.bio-single-wrap.reveal .bio-card{opacity:1;transform:translateY(0);}
+
+.bio-photo-wrap{position:relative;width:100%;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;}
+.bio-photo-wrap img{
+  width:100%;height:100%;object-fit:cover;border-radius:50%;
+  border:2px solid var(--gold-soft);position:relative;z-index:2;
+}
+.bio-photo-glow{
+  position:absolute;inset:-14px;border-radius:50%;z-index:1;
+  background:radial-gradient(circle,rgba(214,177,106,0.35) 0%,rgba(214,177,106,0.12) 55%,transparent 75%);
+  animation:bioPhotoPulse 3.5s ease-in-out infinite;
+  pointer-events:none;
+}
+@keyframes bioPhotoPulse{
+  0%,100%{transform:scale(0.94);opacity:.6;}
+  50%{transform:scale(1.08);opacity:1;}
+}
+.adm-bio-upload{display:none;margin-top:14px;text-align:center;font-size:.7rem;padding:8px 14px;cursor:pointer;}
+body.adm-editing .adm-bio-upload{display:block;position:absolute;bottom:-10px;left:50%;transform:translateX(-50%);white-space:nowrap;z-index:3;}
+
+.bio-text h3{color:var(--gold);font-size:1.5rem;margin-bottom:8px;}
+.bio-text .year{font-family:'Cormorant Garamond',serif;color:var(--gold-soft);font-size:1.15rem;margin-bottom:14px;display:block;}
+.bio-text p{color:var(--muted);font-size:1rem;}
+
+
+/* FAMILY */
+.family-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:25px;}
+.family-card{background:var(--glass);border:1px solid var(--glass-border);border-radius:10px;overflow:hidden;transition:.4s;text-align:center;padding:20px;}
+.family-card.solo{grid-column:1/-1;max-width:50%;margin:0 auto;width:100%;}
+.family-card:hover{transform:translateY(-8px);border-color:var(--gold);box-shadow:0 10px 30px rgba(214,177,106,0.2);}
+.family-card img{width:120px;height:120px;border-radius:50%;object-fit:cover;margin:0 auto 15px;border:2px solid var(--gold-soft);}
+.family-card h3{color:var(--cream);font-size:1.2rem;margin-bottom:4px;}
+.family-card .relation{color:var(--gold);font-family:'Cormorant Garamond',serif;font-size:1rem;margin-bottom:8px;}
+.family-card p{color:var(--muted);font-size:.85rem;}
+
+/* GALERIA */
+#galeria{padding:100px 40px;}
+.gallery-stage{position:relative;width:100%;max-width:980px;margin:0 auto 60px;border-radius:14px;overflow:hidden;border:1px solid var(--glass-border);box-shadow:0 0 60px rgba(214,177,106,0.1);}
+.gallery-stage::before{content:'';position:absolute;inset:0;border-radius:14px;box-shadow:inset 0 0 0 1px rgba(214,177,106,0.35);z-index:4;pointer-events:none;}
+.gallery-track{display:flex;width:100%;height:520px;position:relative;}
+.gallery-slide{position:absolute;inset:0;opacity:0;transition:opacity .9s ease,transform .9s ease;transform:scale(1.03);}
+.gallery-slide.active{opacity:1;transform:scale(1);}
+.gallery-slide img{width:100%;height:100%;object-fit:cover;display:block;}
+.gallery-slide-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.72) 0%,rgba(0,0,0,0.1) 50%,transparent 100%);z-index:2;}
+.gallery-caption{position:absolute;bottom:0;left:0;right:0;z-index:3;padding:28px 36px;transform:translateY(6px);transition:transform .6s ease;}
+.gallery-slide.active .gallery-caption{transform:translateY(0);}
+.gallery-caption h4{font-family:'Playfair Display',serif;font-size:1.25rem;color:var(--cream);margin-bottom:4px;text-shadow:0 2px 12px rgba(0,0,0,0.6);}
+.gallery-caption p{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--gold-soft);font-size:1rem;text-shadow:0 1px 8px rgba(0,0,0,0.5);}
+.gallery-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:5;background:rgba(0,0,0,0.45);border:1px solid rgba(214,177,106,0.35);color:var(--gold);width:46px;height:46px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;transition:.3s;backdrop-filter:blur(6px);}
+.gallery-arrow:hover{background:rgba(214,177,106,0.2);border-color:var(--gold);}
+.gallery-arrow.prev{left:18px;}
+.gallery-arrow.next{right:18px;}
+.gallery-dots{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);z-index:5;display:flex;gap:8px;}
+.gallery-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,0.3);border:1px solid rgba(214,177,106,0.4);cursor:pointer;transition:.35s;}
+.gallery-dot.active{background:var(--gold);transform:scale(1.3);}
+.gallery-counter{position:absolute;top:18px;right:20px;z-index:5;font-size:.7rem;letter-spacing:2px;color:rgba(214,177,106,0.7);font-family:'Montserrat',sans-serif;}
+.gallery-progress-bar{position:absolute;bottom:0;left:0;height:2px;background:var(--gold);z-index:6;transition:width linear;}
+.gallery-video-wrap{max-width:980px;margin:0 auto;}
+.gallery-video-label{text-align:center;margin-bottom:22px;}
+.gallery-video-label span{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.05rem;color:var(--gold-soft);letter-spacing:2px;text-transform:uppercase;}
+.gallery-video-label::before,.gallery-video-label::after{content:'—';margin:0 12px;color:var(--glass-border);}
+.gallery-video-frame{position:relative;padding-bottom:56.25%;height:0;border-radius:14px;overflow:hidden;border:1px solid var(--glass-border);box-shadow:0 0 60px rgba(214,177,106,0.08);}
+.gallery-video-frame::before{content:'';position:absolute;inset:0;border-radius:14px;box-shadow:inset 0 0 0 1px rgba(214,177,106,0.35);z-index:2;pointer-events:none;}
+.gallery-video-frame iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none;}
+.gallery-video-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:var(--muted);font-size:.85rem;letter-spacing:1px;}
+.gallery-video-placeholder i{font-size:2rem;color:var(--glass-border);}
+/* admin gallery */
+.adm-gallery-panel{position:fixed;top:0;right:0;height:100%;width:420px;max-width:92vw;background:var(--bg-soft);border-left:1px solid var(--glass-border);z-index:100000;padding:25px;overflow-y:auto;transform:translateX(100%);transition:transform .3s ease;}
+.adm-gallery-panel.open{transform:translateX(0);}
+.adm-gallery-panel h3{color:var(--gold);font-family:'Playfair Display',serif;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;}
+.adm-gallery-panel h3 button{background:none;border:none;color:var(--muted);font-size:1.2rem;cursor:pointer;}
+.adm-gallery-thumb-list{display:flex;flex-direction:column;gap:12px;margin-bottom:24px;}
+.adm-gallery-thumb{display:flex;align-items:center;gap:12px;background:var(--glass);border:1px solid var(--glass-border);border-radius:8px;padding:10px;}
+.adm-gallery-thumb img{width:64px;height:48px;object-fit:cover;border-radius:5px;border:1px solid var(--glass-border);}
+.adm-gallery-thumb-info{flex:1;min-width:0;}
+.adm-gallery-thumb-info input{width:100%;background:transparent;border:none;border-bottom:1px solid var(--glass-border);color:var(--cream);font-size:.8rem;padding:2px 0;font-family:'Montserrat',sans-serif;}
+.adm-gallery-thumb-info input:focus{outline:none;border-bottom-color:var(--gold);}
+.adm-gallery-thumb-info .thumb-sub{font-size:.7rem;color:var(--muted);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.adm-gallery-thumb button{background:none;border:1px solid rgba(224,128,112,0.4);color:#e08070;border-radius:4px;padding:4px 8px;font-size:.7rem;cursor:pointer;flex-shrink:0;transition:.3s;}
+.adm-gallery-thumb button:hover{background:rgba(224,128,112,0.1);}
+.adm-gallery-add-form{background:var(--glass);border:1px solid var(--glass-border);border-radius:8px;padding:16px;margin-bottom:20px;}
+.adm-gallery-add-form h4{color:var(--gold);font-size:.85rem;letter-spacing:1px;text-transform:uppercase;margin-bottom:12px;}
+.adm-gallery-add-form label{display:block;font-size:.7rem;letter-spacing:1px;text-transform:uppercase;color:var(--gold-soft);margin-bottom:5px;margin-top:10px;}
+.adm-gallery-add-form input{width:100%;padding:8px 10px;background:rgba(0,0,0,0.4);border:1px solid var(--glass-border);color:var(--cream);border-radius:4px;font-family:'Montserrat',sans-serif;font-size:.82rem;}
+.adm-gallery-add-form input:focus{border-color:var(--gold);outline:none;}
+.adm-gallery-add-form button{margin-top:12px;padding:8px 16px;font-size:.75rem;letter-spacing:1px;text-transform:uppercase;border:1px solid var(--gold);background:transparent;color:var(--gold);border-radius:4px;cursor:pointer;transition:.3s;}
+.adm-gallery-add-form button:hover{background:var(--gold);color:var(--bg);}
+.adm-yt-form{background:var(--glass);border:1px solid var(--glass-border);border-radius:8px;padding:16px;}
+.adm-yt-form h4{color:var(--gold);font-size:.85rem;letter-spacing:1px;text-transform:uppercase;margin-bottom:12px;}
+.adm-yt-form label{display:block;font-size:.7rem;letter-spacing:1px;text-transform:uppercase;color:var(--gold-soft);margin-bottom:5px;}
+.adm-yt-form input{width:100%;padding:8px 10px;background:rgba(0,0,0,0.4);border:1px solid var(--glass-border);color:var(--cream);border-radius:4px;font-family:'Montserrat',sans-serif;font-size:.82rem;}
+.adm-yt-form input:focus{border-color:var(--gold);outline:none;}
+.adm-yt-form button{margin-top:12px;padding:8px 16px;font-size:.75rem;letter-spacing:1px;text-transform:uppercase;border:1px solid var(--gold);background:transparent;color:var(--gold);border-radius:4px;cursor:pointer;transition:.3s;}
+.adm-yt-form button:hover{background:var(--gold);color:var(--bg);}
+@media(max-width:768px){
+  #galeria{padding:70px 20px;}
+  .gallery-track{height:320px;}
+  .gallery-caption h4{font-size:1rem;}
+}
+/* MENSAGENS */
+.messages-wrap{display:grid;grid-template-columns:1fr 1.5fr;gap:40px;}
+.msg-form{background:var(--glass);border:1px solid var(--glass-border);padding:30px;border-radius:10px;}
+.form-group{margin-bottom:18px;}
+.form-group label{display:block;font-size:.8rem;letter-spacing:1px;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
+.form-group input,.form-group textarea{width:100%;padding:12px;background:rgba(0,0,0,0.4);border:1px solid var(--glass-border);color:var(--cream);border-radius:5px;font-family:'Montserrat',sans-serif;font-size:.95rem;}
+.form-group input:focus,.form-group textarea:focus{border-color:var(--gold);outline:none;}
+.form-error{color:#e08070;font-size:.8rem;margin-top:5px;min-height:1em;}
+.form-success{color:var(--gold);font-size:.85rem;margin-top:10px;min-height:1em;}
+.mural{display:flex;flex-direction:column;gap:18px;}
+.msg-card{background:var(--glass);border:1px solid var(--glass-border);border-radius:10px;padding:20px;display:flex;gap:15px;backdrop-filter:blur(6px);}
+.msg-avatar{width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-soft));display:flex;align-items:center;justify-content:center;color:var(--bg);font-weight:600;font-family:'Playfair Display',serif;flex-shrink:0;}
+.msg-body{flex:1;}
+.msg-body .msg-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
+.msg-body h4{color:var(--cream);font-size:1rem;}
+.msg-body .msg-date{color:var(--gold-soft);font-size:.75rem;}
+.msg-body p{color:var(--muted);font-size:.9rem;}
+
+/* VELAS */
+#velas{position:relative;background:#000000;}
+.candle-counter{display:none;}
+.candles-grid{display:flex;flex-wrap:wrap;gap:30px;justify-content:center;min-height:200px;align-items:flex-end;padding:30px 0 50px;}
+.candle-input-wrap{display:flex;flex-direction:column;align-items:center;gap:14px;max-width:320px;margin:0 auto 12px;}
+.candle-input-wrap input{width:100%;padding:10px 16px;background:transparent;border:none;border-bottom:1px solid var(--glass-border);color:var(--cream);font-family:'Cormorant Garamond',serif;font-size:1rem;letter-spacing:.5px;text-align:center;transition:.3s;}
+.candle-input-wrap input::placeholder{color:var(--muted);font-style:italic;}
+.candle-input-wrap input:focus{outline:none;border-bottom-color:var(--gold);}
+.candle-light-btn{background:none;border:none;color:var(--gold-soft);font-family:'Cormorant Garamond',serif;font-size:.9rem;letter-spacing:3px;text-transform:uppercase;cursor:pointer;padding:6px 0;position:relative;transition:color .35s, text-shadow .35s;}
+.candle-light-btn::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:0;height:1px;background:var(--gold);transition:width .35s ease;}
+.candle-light-btn:hover{color:#fff8e1;text-shadow:0 0 8px rgba(214,177,106,0.9), 0 0 20px rgba(214,177,106,0.55), 0 0 40px rgba(180,140,60,0.3);}
+.candle-light-btn:hover::after{width:100%;}
+.candle-status{text-align:center;color:var(--gold-soft);font-size:.8rem;font-family:'Cormorant Garamond',serif;font-style:italic;min-height:1.2em;margin-bottom:10px;letter-spacing:.5px;}
+.candle{position:relative;opacity:0;transform:scale(0.6);transition:opacity .8s ease,transform .8s ease;}
+.candle.show{opacity:1;transform:scale(1);}
+.candle-name{position:absolute;bottom:-26px;left:50%;transform:translateX(-50%);font-size:.7rem;color:var(--gold-soft);white-space:nowrap;letter-spacing:.5px;font-family:'Cormorant Garamond',serif;}
+
+/* CSS CANDLE */
+.css-candle{width:50px;height:140px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;position:relative;}
+.css-candle .flame{
+  width:16px;height:38px;
+  border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;
+  background:radial-gradient(ellipse at 50% 65%, #fff7e0 0%, #ffd56b 25%, #ff9d3c 50%, #ff6a2b 75%, #8a4a8a 95%, transparent 100%);
+  box-shadow:0 0 14px 4px rgba(255,170,80,0.6),0 0 30px 10px rgba(214,177,106,0.35),0 0 50px 18px rgba(120,90,200,0.1);
+  transform-origin:bottom center;
+  animation:flicker 1.8s ease-in-out infinite;
+  margin-bottom:-1px;z-index:2;
+}
+.css-candle .flame-glow{
+  position:absolute;top:-10px;left:50%;transform:translateX(-50%);
+  width:70px;height:70px;border-radius:50%;
+  background:radial-gradient(circle, rgba(214,177,106,0.15), transparent 70%);
+  pointer-events:none;animation:glowPulse 4s ease-in-out infinite;
+}
+.css-candle .wick{width:2px;height:6px;background:#333;z-index:1;margin-bottom:-1px;border-radius:1px;}
+.css-candle .wax{
+  width:26px;height:85px;
+  background:linear-gradient(180deg,#fcf4e6 0%,#efe3cc 25%,#d4c4a8 55%,#b8a88a 100%);
+  border-radius:3px 3px 5px 5px;
+  box-shadow:inset -4px 0 6px rgba(0,0,0,0.15),inset 2px 0 4px rgba(255,255,255,0.15),0 2px 8px rgba(0,0,0,0.3);
+  position:relative;
+}
+.css-candle .wax::before{
+  content:'';position:absolute;top:93px;left:50%;transform:translateX(-50%);
+  width:28px;height:5px;background:linear-gradient(180deg,#d4c4a8,#b8a88a);border-radius:0 0 3px 3px;
+}
+
+/* VIDEO CANDLE */
+.video-candle{width:60px;height:130px;position:relative;}
+.candle-video-el{
+  width:60px;height:110px;object-fit:cover;border-radius:4px;
+  box-shadow:0 0 20px rgba(255,170,80,0.35),0 0 40px rgba(214,177,106,0.15);
+  -webkit-mask-image:radial-gradient(ellipse 62% 58% at 50% 46%, #000 45%, transparent 92%);
+  mask-image:radial-gradient(ellipse 62% 58% at 50% 46%, #000 45%, transparent 92%);
+}
+
+@keyframes flicker{
+  0%,100%{transform:scale(1) rotate(-0.8deg);filter:brightness(1);}
+  15%{transform:scale(1.06,0.96) rotate(0.5deg);filter:brightness(1.12);}
+  30%{transform:scale(0.97,1.04) rotate(-1.2deg);filter:brightness(0.92);}
+  50%{transform:scale(1.02,0.98) rotate(0.8deg);filter:brightness(1.05);}
+  70%{transform:scale(0.98,1.02) rotate(-0.6deg);filter:brightness(0.96);}
+  85%{transform:scale(1.03,0.97) rotate(1deg);filter:brightness(1.08);}
+}
+@keyframes glowPulse{0%,100%{opacity:.6;}50%{opacity:1;}}
+
+/* FOOTER */
+footer{padding:50px 40px 30px;text-align:center;border-top:1px solid var(--glass-border);background:var(--bg-soft);}
+footer .footer-logo{font-family:'Playfair Display',serif;color:var(--gold);font-size:1.4rem;margin-bottom:10px;}
+footer p{color:var(--muted);font-size:.85rem;margin-bottom:6px;}
+footer .footer-quote{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--gold-soft);margin:15px 0;}
+footer .footer-bottom-bar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;margin-top:26px;padding-top:20px;border-top:1px solid var(--glass-border);text-align:left;}
+footer .footer-credit{display:flex;align-items:center;gap:10px;flex-wrap:wrap;color:var(--muted);font-size:.78rem;}
+footer .footer-mini-logo{height:20px;width:auto;object-fit:contain;display:none;opacity:.85;}
+footer .footer-mini-logo.has-logo{display:inline-block;}
+footer .footer-social-link{color:var(--muted);font-size:.95rem;transition:.3s;line-height:1;}
+footer .footer-social-link:hover{color:var(--gold);}
+footer .adm-footer-link{color:var(--gold-soft);font-size:.78rem;text-decoration:none;border-bottom:1px solid transparent;}
+footer .adm-footer-link:hover{border-color:var(--gold-soft);}
+.adm-edit-social-btn{display:none;background:transparent;border:1px solid var(--glass-border);color:var(--muted);border-radius:50%;width:22px;height:22px;align-items:center;justify-content:center;font-size:.65rem;cursor:pointer;transition:.3s;}
+body.adm-editing .adm-edit-social-btn{display:inline-flex;}
+body.adm-editing .adm-edit-social-btn:hover{border-color:var(--gold);color:var(--gold);}
+@media (max-width:600px){
+  footer .footer-bottom-bar{justify-content:center;text-align:center;}
+}
+
+/* REVEAL */
+.reveal-target{opacity:0;transform:translateY(40px);transition:opacity .8s ease,transform .8s ease;}
+.reveal-target.reveal{opacity:1;transform:translateY(0);}
+
+/* RESPONSIVE */
+@media(max-width:860px){
+  .nav-links{display:none;position:absolute;top:100%;left:0;width:100%;flex-direction:column;background:rgba(7,7,7,0.97);padding:20px;gap:18px;border-bottom:1px solid var(--glass-border);}
+  .nav-links.open{display:flex;}
+  .hamburger{display:block;}
+  .navbar{padding:15px 20px;}
+  .navbar.scrolled{padding:10px 20px;}
+  .hero-title{font-size:2.4rem;}
+  .hero-quote{font-size:1.05rem;}
+  section{padding:70px 20px;}
+  .timeline::before{left:20px;}
+  .timeline-item,.timeline-item:nth-child(even){flex-direction:row;}
+  .timeline-content{width:calc(100% - 50px);margin-left:50px;}
+  .timeline-dot{left:20px;}
+  .bio-card{grid-template-columns:1fr;text-align:center;}
+  .bio-photo-wrap{max-width:180px;margin:0 auto 20px;}
+  .messages-wrap{grid-template-columns:1fr;}
+}
+@media(max-width:480px){
+  .family-grid{grid-template-columns:1fr;}
+  .family-card.solo{max-width:100%;}
+}
+
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;}
+  .reveal-target,.timeline-item{opacity:1 !important;transform:none !important;}
+  .bio-connector-top::before,.bio-connector-bottom::after,.bio-card,.bio-dot{opacity:1 !important;transform:none !important;animation:none !important;}
+}
+
+/* ===== ÁREA ADMIN ===== */
+.adm-footer-link{display:inline-block;margin-top:14px;font-size:.7rem;color:var(--muted);opacity:.5;letter-spacing:1px;text-transform:uppercase;transition:.3s;}
+.adm-footer-link:hover{opacity:1;color:var(--gold);}
+
+.adm-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.75);backdrop-filter:blur(4px);z-index:100001;display:flex;align-items:center;justify-content:center;padding:20px;}
+.adm-overlay.hidden{display:none;}
+.adm-modal{background:var(--bg-soft);border:1px solid var(--glass-border);border-radius:10px;padding:35px;max-width:400px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.5);}
+.adm-modal h3{color:var(--gold);font-family:'Playfair Display',serif;margin-bottom:20px;font-size:1.4rem;}
+.adm-modal .form-group{margin-bottom:16px;}
+.adm-modal label{display:block;font-size:.75rem;letter-spacing:1px;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
+.adm-modal input{width:100%;padding:10px 12px;background:rgba(0,0,0,0.4);border:1px solid var(--glass-border);color:var(--cream);border-radius:5px;font-family:'Montserrat',sans-serif;}
+.adm-modal input:focus{border-color:var(--gold);outline:none;}
+.adm-modal-actions{display:flex;gap:10px;margin-top:20px;}
+.adm-modal .btn-secondary{border-color:var(--muted);color:var(--muted);}
+.adm-error-msg{color:#e08070;font-size:.8rem;margin-top:8px;min-height:1em;}
+.adm-success-msg{color:var(--gold);font-size:.8rem;margin-top:8px;min-height:1em;}
+
+.adm-toolbar{position:fixed;bottom:0;left:0;width:100%;z-index:100000;background:rgba(7,7,7,0.95);border-top:1px solid var(--glass-border);padding:12px 20px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;backdrop-filter:blur(10px);}
+.adm-toolbar.hidden{display:none;}
+.adm-toolbar .adm-brand{color:var(--gold);font-family:'Playfair Display',serif;font-size:.95rem;margin-right:auto;}
+.adm-toolbar button{padding:8px 16px;font-size:.75rem;letter-spacing:1px;text-transform:uppercase;border:1px solid var(--gold);background:transparent;color:var(--gold);border-radius:4px;cursor:pointer;transition:.3s;position:relative;}
+.adm-toolbar button:hover{background:var(--gold);color:var(--bg);}
+.adm-toolbar button.active{background:var(--gold);color:var(--bg);}
+.adm-badge{position:absolute;top:-8px;right:-8px;background:#e08070;color:#fff;border-radius:50%;width:18px;height:18px;font-size:.65rem;display:flex;align-items:center;justify-content:center;}
+body.adm-mode-active{padding-bottom:64px;}
+
+/* modo edição: destaca campos editáveis */
+body.adm-editing [data-key]{outline:1px dashed rgba(214,177,106,0.5);outline-offset:3px;border-radius:3px;cursor:text;transition:.2s;}
+body.adm-editing [data-key]:hover{outline:1px dashed var(--gold);background:rgba(214,177,106,0.06);}
+body.adm-editing [data-key]:focus{outline:2px solid var(--gold);background:rgba(214,177,106,0.1);}
+
+.adm-card-controls{display:none;gap:8px;justify-content:center;margin-top:12px;}
+body.adm-editing .adm-card-controls{display:flex;}
+.adm-card-controls button,.adm-add-card{padding:6px 12px;font-size:.7rem;border:1px solid var(--glass-border);background:rgba(0,0,0,0.3);color:var(--cream);border-radius:4px;cursor:pointer;}
+.adm-card-controls button:hover{border-color:var(--gold);color:var(--gold);}
+.adm-card-controls .adm-danger:hover{border-color:#e08070;color:#e08070;}
+.adm-add-card{display:none;width:100%;min-height:180px;align-items:center;justify-content:center;border:1px dashed var(--glass-border);flex-direction:column;gap:8px;background:transparent;}
+body.adm-editing .adm-add-card{display:flex;}
+.adm-add-card:hover{border-color:var(--gold);color:var(--gold);}
+.adm-hero-upload{display:none;}
+body.adm-editing .adm-hero-upload{display:block;position:absolute;bottom:70px;left:50%;transform:translateX(-50%);z-index:3;}
+
+.adm-pending-panel{position:fixed;top:0;right:0;height:100%;width:380px;max-width:90vw;background:var(--bg-soft);border-left:1px solid var(--glass-border);z-index:100000;padding:25px;overflow-y:auto;transform:translateX(100%);transition:transform .3s ease;}
+.adm-pending-panel.open{transform:translateX(0);}
+.adm-pending-panel h3{color:var(--gold);font-family:'Playfair Display',serif;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;}
+.adm-pending-panel h3 button{background:none;border:none;color:var(--muted);font-size:1.2rem;cursor:pointer;}
+.adm-pending-item{background:var(--glass);border:1px solid var(--glass-border);border-radius:8px;padding:15px;margin-bottom:14px;}
+.adm-pending-item .msg-head{display:flex;justify-content:space-between;margin-bottom:8px;}
+.adm-pending-item h4{color:var(--cream);font-size:.95rem;}
+.adm-pending-item .msg-date{color:var(--gold-soft);font-size:.7rem;}
+.adm-pending-item p{color:var(--muted);font-size:.85rem;margin-bottom:10px;}
+.adm-pending-item .pending-actions{display:flex;gap:8px;}
+.adm-pending-item .pending-actions button{flex:1;padding:6px;font-size:.7rem;border-radius:4px;cursor:pointer;border:1px solid var(--glass-border);background:transparent;color:var(--cream);}
+.adm-pending-item .approve:hover{border-color:var(--gold);color:var(--gold);}
+.adm-pending-item .reject:hover{border-color:#e08070;color:#e08070;}
+.adm-empty-note{color:var(--muted);font-size:.85rem;text-align:center;margin-top:30px;}
+/* ==========================================================================
+   TELA DE ENTRADA (WELCOME OVERLAY) - SOLUÇÃO AUTOPLAY
+   ========================================================================== */
+
+/* Trava a rolagem da tela enquanto a introdução estiver ativa */
+body.locked {
+  overflow: hidden !important;
+}
+
+.welcome-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--bg);
+  z-index: 99999; /* Garante que fica por cima de toda a página e menus */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1), visibility 1.2s ease;
+}
+
+/* Copia idêntica dos fundos e efeitos do seu Hero original */
+.welcome-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?w=1920&q=80');
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.3);
+  z-index: -2;
+}
+
+.welcome-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, rgba(7,7,7,0.4) 0%, rgba(7,7,7,0.85) 70%, rgba(0,0,0,0.95) 100%);
+  z-index: -1;
+}
+
+/* Classe disparada via JS para fazer a tela desaparecer suavemente */
+.welcome-overlay.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Rodapé simples da tela de abertura, com acesso à área administrativa */
+.welcome-footer{
+  position:absolute;
+  bottom:18px;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:2;
+  text-align:center;
+}
+
+/* Botão de troca de foto de capa, reaproveitado também na tela de abertura */
+body.adm-editing .welcome-overlay .adm-hero-upload{
+  bottom:64px;
+}
+
+/* Garante que o texto do logo do cabeçalho ("Eternal Memory") herde a cor correta mesmo dentro do wrapper editável */
+.nav-logo-text-wrap{color:var(--gold);}
+.nav-logo-text-wrap span{color:var(--cream);}
+</style>
+</head>
+<body class="locked">
+
+  <!-- ================= TELA DE ABERTURA ================= -->
+  <div class="welcome-overlay" id="welcomeOverlay">
+    <div class="hero-edge-glow"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow" data-key="welcome-eyebrow">Em Memória de</div>
+      <h1 class="hero-title" data-key="welcome-title" data-html="1">Elena <em>Marquette</em></h1>
+      <div class="hero-dates" data-key="welcome-dates">1938 — 2024</div>
+      <p class="hero-quote" data-key="welcome-quote" style="margin-bottom: 2.5rem;">
+        "Aqueles que amamos não vão embora, eles caminham ao nosso lado todos os dias."
+      </p>
+      <button class="btn" id="enterSiteBtn">
+        <i class="fa-solid fa-music" style="margin-right: 8px;"></i><span data-key="welcome-btn-text">Entrar no Memorial</span>
+      </button>
+      <label class="adm-hero-upload btn" for="admHeroFile" style="cursor:pointer;">Alterar foto de capa</label>
+    </div>
+    <div class="welcome-footer">
+      <a href="#" class="adm-footer-link" id="admOpenLoginLinkWelcome">Área administrativa</a>
+    </div>
+  </div>
+
+  <!-- ELEMENTO DE ÁUDIO (Insira o link da música aqui) -->
+  <audio id="bgMusic" loop>
+    <source src="SUA_MUSICA_DE_FUNDO.mp3" type="audio/mpeg">
+    Seu navegador não suporta o elemento de áudio.
+  </audio>
+  <!-- =================================================== -->
+
+<nav class="navbar" id="navbar" aria-label="Navegação principal">
+  <a href="#inicio" class="nav-logo" aria-label="Eternal Memory início"><img src="" alt="" class="nav-logo-img" id="navLogoImg"><em class="nav-logo-text-wrap" data-key="nav-logo-text" data-html="1" style="font-style:normal;">Eternal <span>Memory</span></em></a>
+  <label class="adm-logo-upload" for="admHeaderLogoFile" title="Alterar logo do cabeçalho"><i class="fa-solid fa-image"></i></label>
+  <input type="file" id="admHeaderLogoFile" accept="image/*" style="display:none;">
+  <ul class="nav-links" id="navLinks" role="menubar">
+    <li role="none"><a href="#inicio" role="menuitem" data-key="nav-link-inicio">Início</a></li>
+    <li role="none"><a href="#biografia" role="menuitem" data-key="nav-link-biografia">Biografia</a></li>
+    <li role="none"><a href="#familia" role="menuitem" data-key="nav-link-familia">Família</a></li>
+    <li role="none"><a href="#galeria" role="menuitem" data-key="nav-link-galeria">Galeria</a></li>
+    <li role="none"><a href="#mensagens" role="menuitem" data-key="nav-link-mensagens">Mensagens</a></li>
+    <li role="none"><a href="#velas" role="menuitem" data-key="nav-link-velas">Acender uma Vela</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false" aria-controls="navLinks">
+    <i class="fa-solid fa-bars"></i>
+  </button>
+</nav>
+
+<header class="hero" id="inicio">
+  <div class="hero-edge-glow"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow" data-key="hero-eyebrow">Eternal Memory</div>
+    <h1 class="hero-title" data-key="hero-title" data-html="1">Elena <em>Marquette</em></h1>
+    <div class="hero-dates" data-key="hero-dates">1968 — 2024</div>
+    <p class="hero-quote" data-key="hero-quote">“A luz que acendemos no coração daqueles que amamos nunca se apaga.”</p>
+  </div>
+  <div class="hero-scroll">Role para lembrar ↓</div>
+  <label class="adm-hero-upload btn" for="admHeroFile" style="cursor:pointer;">Alterar foto do hero
+    <input type="file" id="admHeroFile" accept="image/*" style="display:none;">
+  </label>
+</header>
+
+<section id="biografia">
+  <div class="section-title reveal-target">
+    <h2 data-key="bio-title">Biografia</h2>
+    <p class="subtitle" data-key="bio-subtitle">Uma vida de amor, arte e memória</p>
+    <div class="divider"></div>
+  </div>
+
+  <div class="bio-single-wrap reveal-target" id="bioSingleWrap">
+    <div class="bio-connector-top"><span class="bio-dot"></span></div>
+
+    <div class="bio-card" id="bioCard">
+      <div class="bio-photo-wrap">
+        <div class="bio-photo-glow"></div>
+        <img id="bioPhoto" src="https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?w=500&h=500&fit=crop&q=80" alt="Foto de Elena Marquette">
+        <label class="adm-bio-upload btn" for="admBioFile">Alterar foto
+          <input type="file" id="admBioFile" accept="image/*" style="display:none;">
+        </label>
+      </div>
+      <div class="bio-text">
+        <h3 data-key="bio-card-title">Uma Vida de Luz</h3>
+        <span class="year" data-key="bio-card-year">1968 — 2024 · Paris</span>
+        <p data-key="bio-card-text">Elena nasceu em uma pequena vila nos arredores de Paris, filha de pintores e sonhadores. Estudou escultura em Lyon, casou-se à luz de velas em Lisboa e foi mãe de gêmeos no Porto. Partiu serenamente em 2024, deixando um legado de ternura, arte e memória que vive em cada vela acesa.</p>
+      </div>
+    </div>
+
+    <div class="bio-connector-bottom">
+      <span class="bio-dot"></span>
+    </div>
+  </div>
+</section>
+
+<section id="familia">
+  <div class="section-title reveal-target">
+    <h2 data-key="fam-title">Família</h2>
+    <p class="subtitle" data-key="fam-subtitle">Os que carregam sua luz</p>
+    <div class="divider"></div>
+  </div>
+  <div class="family-grid" id="familyGrid"></div>
+</section>
+
+<section id="galeria">
+  <div class="section-title reveal-target">
+    <h2 data-key="gal-title">Galeria</h2>
+    <p class="subtitle" data-key="gal-subtitle">Momentos que o tempo não apaga</p>
+    <div class="divider"></div>
+  </div>
+
+  <div class="gallery-stage reveal-target" id="galleryStage">
+    <div class="gallery-track" id="galleryTrack"></div>
+    <button class="gallery-arrow prev" id="galleryPrev" aria-label="Foto anterior"><i class="fa-solid fa-chevron-left"></i></button>
+    <button class="gallery-arrow next" id="galleryNext" aria-label="Próxima foto"><i class="fa-solid fa-chevron-right"></i></button>
+    <div class="gallery-dots" id="galleryDots"></div>
+    <div class="gallery-counter" id="galleryCounter"></div>
+    <div class="gallery-progress-bar" id="galleryProgress"></div>
+  </div>
+
+  <div class="gallery-video-wrap reveal-target">
+    <div class="gallery-video-label"><span data-key="gal-video-label">Em Memória</span></div>
+    <div class="gallery-video-frame" id="galleryVideoFrame">
+      <div class="gallery-video-placeholder" id="galleryVideoPlaceholder">
+        <i class="fa-brands fa-youtube"></i>
+        <span>Vídeo não configurado</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="mensagens">
+  <div class="section-title reveal-target">
+    <h2 data-key="msg-title">Mensagens</h2>
+    <p class="subtitle" data-key="msg-subtitle">Deixe suas palavras no mural da memória</p>
+    <div class="divider"></div>
+  </div>
+  <div class="messages-wrap">
+    <form class="msg-form reveal-target" id="msgForm" novalidate>
+      <div class="form-group">
+        <label for="msgName">Nome</label>
+        <input type="text" id="msgName" name="msgName" required aria-required="true">
+        <div class="form-error" id="errName"></div>
+      </div>
+      <div class="form-group">
+        <label for="msgEmail">E-mail</label>
+        <input type="email" id="msgEmail" name="msgEmail" required aria-required="true">
+        <div class="form-error" id="errEmail"></div>
+      </div>
+      <div class="form-group">
+        <label for="msgText">Mensagem</label>
+        <textarea id="msgText" name="msgText" rows="4" required aria-required="true"></textarea>
+        <div class="form-error" id="errText"></div>
+      </div>
+      <button type="submit" class="btn">Enviar Mensagem</button>
+      <div class="form-success" id="formSuccess" role="status" aria-live="polite"></div>
+    </form>
+    <div class="mural reveal-target" id="mural" aria-label="Mural de mensagens">
+      <article class="msg-card">
+        <div class="msg-avatar">A</div>
+        <div class="msg-body"><div class="msg-head"><h4>Antoine</h4><span class="msg-date">12/03/2024</span></div><p>Elena, cada vela que acendo é um pedacinho de você voltando para casa. Te amo eternamente.</p></div>
+      </article>
+      <article class="msg-card">
+        <div class="msg-avatar">S</div>
+        <div class="msg-body"><div class="msg-head"><h4>Sofia</h4><span class="msg-date">18/03/2024</span></div><p>Mamãe, obrigada por me ensinar que a luz nunca se apaga quando é levada no coração.</p></div>
+      </article>
+      <article class="msg-card">
+        <div class="msg-avatar">M</div>
+        <div class="msg-body"><div class="msg-head"><h4>Marguerite</h4><span class="msg-date">02/04/2024</span></div><p>Irmã querida, sua risada ainda ecoa por toda a casa. Até nos encontrarmos de novo.</p></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="velas">
+  <video id="candleVideoTest" muted preload="auto"
+    style="position:absolute;width:2px;height:2px;opacity:0;pointer-events:none;"
+    playsinline></video>
+
+  <div class="section-title reveal-target">
+    <h2 data-key="velas-title">Acender uma Vela</h2>
+    <p class="subtitle" data-key="velas-subtitle">Que sua luz brilhe para sempre</p>
+    <div class="divider"></div>
+  </div>
+
+  <div class="candles-grid" id="candlesGrid" aria-label="Velas acesas"></div>
+
+  <div class="candle-input-wrap">
+    <input type="text" id="candleName" placeholder="seu nome (opcional)" aria-label="Nome para a vela" maxlength="40">
+    <button class="candle-light-btn" id="lightCandleBtn">✦ acender uma vela</button>
+  </div>
+  <div class="candle-status" id="candleStatus" role="status" aria-live="polite"></div>
+</section>
+
+<footer>
+  <div class="footer-logo">Eternal Memory</div>
+  <p class="footer-quote" data-key="footer-quote">“A memória é a vela que nunca se apaga.”</p>
+  <p data-key="footer-line">Em homenagem a Elena Marquette · 1968 — 2024</p>
+  <p>&copy; <span id="year"></span> Eternal Memory. Feito com amor e luz.</p>
+  <div class="footer-bottom-bar">
+    <div class="footer-credit">
+      <img src="" alt="" class="footer-mini-logo" id="footerLogoImg">
+      <label class="adm-logo-upload" for="admFooterLogoFile" title="Alterar logo do rodapé"><i class="fa-solid fa-image"></i></label>
+      <input type="file" id="admFooterLogoFile" accept="image/*" style="display:none;">
+      <span data-key="footer-credit-text">Produzido por &copy; Utopia Desenvolvimentos</span>
+      <a href="#" class="footer-social-link" id="footerInstagramLink" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+      <a href="#" class="footer-social-link" id="footerWhatsappLink" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+      <button type="button" class="adm-edit-social-btn" id="admEditSocialBtn" title="Editar links do rodapé"><i class="fa-solid fa-pen"></i></button>
+    </div>
+    <a href="#" class="adm-footer-link" id="admOpenLoginLink">Área administrativa</a>
+  </div>
+</footer>
+
+<!-- ===== MODAL DE LOGIN ADMIN ===== -->
+<div class="adm-overlay hidden" id="admLoginOverlay">
+  <div class="adm-modal">
+    <h3>Área do Desenvolvedor</h3>
+    <form id="admLoginForm" novalidate>
+      <div class="form-group">
+        <label for="admLoginUser">Login</label>
+        <input type="text" id="admLoginUser" autocomplete="username" required>
+      </div>
+      <div class="form-group">
+        <label for="admLoginPass">Senha</label>
+        <input type="password" id="admLoginPass" autocomplete="current-password" required>
+      </div>
+      <div class="adm-error-msg" id="admLoginError"></div>
+      <div class="adm-modal-actions">
+        <button type="submit" class="btn">Entrar</button>
+        <button type="button" class="btn btn-secondary" id="admLoginCancel">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ===== MODAL TROCAR SENHA ===== -->
+<div class="adm-overlay hidden" id="admPassOverlay">
+  <div class="adm-modal">
+    <h3>Alterar Senha</h3>
+    <form id="admPassForm" novalidate>
+      <div class="form-group">
+        <label for="admNewUser">Novo login</label>
+        <input type="text" id="admNewUser" required>
+      </div>
+      <div class="form-group">
+        <label for="admNewPass">Nova senha</label>
+        <input type="password" id="admNewPass" required minlength="4">
+      </div>
+      <div class="form-group">
+        <label for="admNewPass2">Confirmar nova senha</label>
+        <input type="password" id="admNewPass2" required minlength="4">
+      </div>
+      <div class="adm-error-msg" id="admPassError"></div>
+      <div class="adm-success-msg" id="admPassSuccess"></div>
+      <div class="adm-modal-actions">
+        <button type="submit" class="btn">Salvar</button>
+        <button type="button" class="btn btn-secondary" id="admPassCancel">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ===== BARRA DE FERRAMENTAS ADMIN ===== -->
+<div class="adm-toolbar hidden" id="admToolbar">
+  <span class="adm-brand"><i class="fa-solid fa-key"></i> Modo Desenvolvedor</span>
+  <button type="button" id="admToggleEdit">Ativar Edição</button>
+  <button type="button" id="admOpenGallery">Galeria</button>
+  <button type="button" id="admOpenPending">Mensagens Pendentes <span class="adm-badge hidden" id="admPendingBadge">0</span></button>
+  <button type="button" id="admChangePass">Alterar Senha</button>
+  <button type="button" id="admLogout">Sair</button>
+</div>
+
+<!-- ===== PAINEL DE MODERAÇÃO ===== -->
+<div class="adm-pending-panel" id="admPendingPanel">
+  <h3>Mensagens Pendentes <button type="button" id="admClosePending" aria-label="Fechar">&times;</button></h3>
+  <div id="admPendingList"></div>
+</div>
+
+<!-- ===== PAINEL DA GALERIA ===== -->
+<div class="adm-gallery-panel" id="admGalleryPanel">
+  <h3>Galeria de Fotos <button type="button" id="admCloseGallery" aria-label="Fechar">&times;</button></h3>
+  <div class="adm-gallery-thumb-list" id="admGalleryThumbList"></div>
+  <div class="adm-gallery-add-form">
+    <h4><i class="fa-solid fa-plus"></i> Adicionar foto</h4>
+    <label for="admGalleryImgUrl">URL da imagem</label>
+    <input type="url" id="admGalleryImgUrl" placeholder="https://...">
+    <label for="admGalleryCaption">Título (opcional)</label>
+    <input type="text" id="admGalleryCaption" placeholder="Um momento especial...">
+    <label for="admGalleryDesc">Descrição (opcional)</label>
+    <input type="text" id="admGalleryDesc" placeholder="Legenda da foto">
+    <button type="button" id="admGalleryAddBtn">Adicionar à galeria</button>
+  </div>
+  <div class="adm-yt-form">
+    <h4><i class="fa-brands fa-youtube"></i> Vídeo do YouTube</h4>
+    <label for="admYtUrl">URL do vídeo</label>
+    <input type="url" id="admYtUrl" placeholder="https://www.youtube.com/watch?v=...">
+    <button type="button" id="admYtSaveBtn">Salvar vídeo</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+
+  let videoReady = false;
+  let videoReadyResolved = false; // evita que múltiplos eventos disparem a checagem 2x
+  let candleCount = 0;
+  const VIDEO_SRC = 'assets/video.mp4';
+  const grid = document.getElementById('candlesGrid');
+  const statusEl = document.getElementById('candleStatus');
+  const countEl = document.getElementById('candleCount');
+
+  function escHtml(str){
+    return String(str).replace(/[&<>"']/g,function(c){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  }
+
+  function createVideoCandle(name){
+    const div = document.createElement('div');
+    div.className = 'candle video-candle';
+    const vid = document.createElement('video');
+    vid.src = VIDEO_SRC;
+    vid.loop = true;
+    vid.muted = true;
+    vid.autoplay = true;
+    vid.playsInline = true;
+    vid.setAttribute('muted','');       // reforça o atributo, não só a propriedade (Safari é chato com isso)
+    vid.setAttribute('playsinline','');
+    vid.setAttribute('aria-hidden','true');
+    vid.className = 'candle-video-el';
+
+    // Fallback por vela individual: se ESTE vídeo específico falhar,
+    // troca só ele por uma vela CSS, sem quebrar a vela visualmente.
+    vid.addEventListener('error', function(){
+      console.warn('[velas] Falha ao carregar vídeo de uma vela individual, usando fallback CSS.', vid.error);
+      const cssReplacement = createCssCandle(name);
+      cssReplacement.classList.add('show');
+      div.replaceWith(cssReplacement);
+    }, { once: true });
+
+    div.appendChild(vid);
+    if(name){
+      const span = document.createElement('span');
+      span.className = 'candle-name';
+      span.textContent = name;
+      div.appendChild(span);
+    }
+
+    // Chamar .play() explicitamente é o que garante o autoplay de forma
+    // confiável em todos os navegadores — estamos dentro do clique do
+    // usuário (gesto), então o navegador permite. Não depender só do
+    // atributo autoplay para elementos criados dinamicamente.
+    const playPromise = vid.play();
+    if(playPromise && playPromise.catch){
+      playPromise.catch(function(err){
+        console.warn('[velas] play() da vela-vídeo foi bloqueado:', err);
+      });
+    }
+
+    return div;
+  }
+
+  function createCssCandle(name, appendNameSpan){
+    const div = document.createElement('div');
+    div.className = 'candle css-candle';
+    const showName = appendNameSpan !== false;
+    div.innerHTML =
+      '<div class="flame-glow"></div>' +
+      '<div class="flame"></div>' +
+      '<div class="wick"></div>' +
+      '<div class="wax"></div>' +
+      (name && showName ? '<span class="candle-name">' + escHtml(name) + '</span>' : '');
+    return div;
+  }
+
+  function animateCounter(){
+    const el = document.getElementById('candleCount');
+    const target = candleCount;
+    const start = parseInt(el.textContent) || 0;
+    if(start === target) return;
+    const dur = 700;
+    const t0 = performance.now();
+    function step(now){
+      const p = Math.min((now - t0) / dur, 1);
+      const e = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(start + (target - start) * e);
+      if(p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  function addCandle(name){
+    // Se o vídeo já tentou e definitivamente falhou, usa CSS direto (sem lag).
+    // Se ainda está carregando ou já carregou com sucesso, usa vídeo com fallback por vela.
+    const candle = (videoReadyResolved && !videoReady) ? createCssCandle(name) : createVideoCandle(name);
+    grid.appendChild(candle);
+    requestAnimationFrame(function(){
+      candle.classList.add('show');
+    });
+    candleCount++;
+    animateCounter();
+  }
+
+  function showStatus(msg, ms){
+    statusEl.textContent = msg;
+    if(ms){
+      setTimeout(function(){
+        if(statusEl.textContent === msg) statusEl.textContent = '';
+      }, ms);
+    }
+  }
+
+  document.getElementById('lightCandleBtn').addEventListener('click', function(){
+    const input = document.getElementById('candleName');
+    const name = input.value.trim();
+    addCandle(name);
+    input.value = '';
+    showStatus(videoReady ? 'Vela acesa com luz de vídeo. Que sua memória brilhe.' : 'Vela acesa. Que sua memória brilhe.', 4000);
+  });
+
+  document.getElementById('candleName').addEventListener('keydown', function(e){
+    if(e.key === 'Enter'){ e.preventDefault(); document.getElementById('lightCandleBtn').click(); }
+  });
+
+  // MENSAGENS
+  const mural = document.getElementById('mural');
+  function initials(name){
+    const parts = name.trim().split(/\s+/);
+    let s = parts[0].charAt(0).toUpperCase();
+    if(parts.length > 1) s += parts[parts.length-1].charAt(0).toUpperCase();
+    return s;
+  }
+  function formatDate(d){
+    const dd = String(d.getDate()).padStart(2,'0');
+    const mm = String(d.getMonth()+1).padStart(2,'0');
+    const yy = d.getFullYear();
+    return dd + '/' + mm + '/' + yy;
+  }
+  function addMessage(name, text){
+    const card = document.createElement('article');
+    card.className = 'msg-card';
+    card.innerHTML =
+      '<div class="msg-avatar">' + escHtml(initials(name)) + '</div>' +
+      '<div class="msg-body">' +
+        '<div class="msg-head"><h4>' + escHtml(name) + '</h4><span class="msg-date">' + formatDate(new Date()) + '</span></div>' +
+        '<p>' + escHtml(text) + '</p>' +
+      '</div>';
+    mural.prepend(card);
+  }
+
+  document.getElementById('msgForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const name = document.getElementById('msgName').value.trim();
+    const email = document.getElementById('msgEmail').value.trim();
+    const text = document.getElementById('msgText').value.trim();
+    const errName = document.getElementById('errName');
+    const errEmail = document.getElementById('errEmail');
+    const errText = document.getElementById('errText');
+    const success = document.getElementById('formSuccess');
+    errName.textContent = ''; errEmail.textContent = ''; errText.textContent = ''; success.textContent = '';
+    let ok = true;
+    if(!name){ errName.textContent = 'Por favor, informe seu nome.'; ok = false; }
+    if(!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ errEmail.textContent = 'E-mail inválido.'; ok = false; }
+    if(!text || text.length < 5){ errText.textContent = 'Escreva uma mensagem com pelo menos 5 caracteres.'; ok = false; }
+    if(!ok) return;
+    if(window.AdminApp){
+      window.AdminApp.submitForModeration(name, email, text);
+    } else {
+      addMessage(name, text);
+    }
+    this.reset();
+    success.textContent = 'Sua mensagem foi enviada para moderação e será exibida após aprovação. Obrigado.';
+    setTimeout(function(){ success.textContent = ''; }, 6000);
+  });
+
+  // NAVBAR
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', function(){
+    if(window.scrollY > 50) navbar.classList.add('scrolled');
+    else navbar.classList.remove('scrolled');
+  });
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('navLinks');
+  hamburger.addEventListener('click', function(){
+    const open = navLinks.classList.toggle('open');
+    hamburger.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  navLinks.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      navLinks.classList.remove('open');
+      hamburger.setAttribute('aria-expanded','false');
+    });
+  });
+
+  // INTERSECTION OBSERVER
+  const io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(en.isIntersecting){
+        en.target.classList.add('reveal');
+        io.unobserve(en.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal-target, .timeline-item').forEach(function(el){ io.observe(el); });
+
+  // FOOTER YEAR
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // INIT — DOMContentLoaded logic
+  function init(){
+    // a) PRIMEIRA vela também tenta ser a vela-vídeo (mesmo fallback
+    // automático das demais: se o vídeo falhar, ela vira CSS sozinha).
+    const firstCandle = createVideoCandle('Elena');
+    grid.appendChild(firstCandle);
+    requestAnimationFrame(function(){ firstCandle.classList.add('show'); });
+    candleCount++;
+    animateCounter();
+
+    const testVideo = document.getElementById('candleVideoTest');
+    testVideo.src = VIDEO_SRC;
+
+    // b) videoReady = false (já declarado)
+
+    // c) Detecção de prontidão: usamos o PRIMEIRO evento que disparar entre
+    // loadeddata / canplay / canplaythrough, em vez de depender só do
+    // canplaythrough (que é o mais lento e não tem garantia de disparar
+    // em todos os navegadores/condições de rede).
+    function markReady(eventName){
+      if(videoReadyResolved) return;
+      videoReadyResolved = true;
+      videoReady = true;
+      console.info('[velas] Vídeo pronto via evento "' + eventName + '".');
+      showStatus('Velas em vídeo disponíveis.', 3000);
+    }
+    ['loadeddata','canplay','canplaythrough'].forEach(function(evt){
+      testVideo.addEventListener(evt, function(){ markReady(evt); }, { once: true });
+    });
+
+    // e) erro -> videoReady permanece false, mas agora logamos o motivo real
+    // (ex: MEDIA_ERR_SRC_NOT_SUPPORTED = 404 / caminho errado do arquivo)
+    testVideo.addEventListener('error', function(){
+      videoReadyResolved = true;
+      videoReady = false;
+      const err = testVideo.error;
+      console.error('[velas] Vídeo de teste falhou ao carregar. Verifique se "' + VIDEO_SRC + '" está na mesma pasta do HTML publicado. Detalhes:', err ? { code: err.code, message: err.message } : 'sem detalhes');
+      showStatus('Velas em modo clássico (vídeo indisponível).', 3000);
+    }, { once: true });
+
+    // f) timeout de segurança 10s
+    setTimeout(function(){
+      if(!videoReadyResolved){
+        videoReadyResolved = true;
+        videoReady = false;
+        console.warn('[velas] Tempo esgotado esperando o vídeo carregar (10s). Seguindo em modo CSS. Verifique o caminho do arquivo "' + VIDEO_SRC + '".');
+      }
+    }, 10000);
+
+    // tentar forçar play silencioso para alguns navegadores
+    try{
+      const p = testVideo.play();
+      if(p && p.catch){ p.catch(function(err){ console.warn('[velas] play() do vídeo de teste foi bloqueado:', err); }); }
+    }catch(err){
+      console.warn('[velas] Erro ao chamar play() no vídeo de teste:', err);
+    }
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+
+  // Exposto para o módulo da área administrativa (script separado abaixo)
+  window.EternalMemory = { addMessage: addMessage, escHtml: escHtml, formatDate: formatDate };
+})();
+// ================= LÓGICA DO BOTÃO E ÁUDIO (COLE AQUI) =================
+  document.addEventListener('DOMContentLoaded', function() {
+    var overlay = document.getElementById('welcomeOverlay');
+    var enterBtn = document.getElementById('enterSiteBtn');
+    var bgMusic = document.getElementById('bgMusic');
+
+    if (enterBtn && overlay && bgMusic) {
+      enterBtn.addEventListener('click', function() {
+        // 1. Toca a música (como houve um clique físico, os navegadores permitem)
+        bgMusic.play().catch(function(error) {
+          console.log("O áudio foi bloqueado ou o link é inválido:", error);
+        });
+        
+        // 2. Oculta a tela de introdução com fade-out
+        overlay.classList.add('hidden');
+        
+        // 3. Libera a rolagem do site principal
+        document.body.classList.remove('locked');
+      });
+    }
+  });
+  // =======================================================================
+</script>
+
+<script>
+/* =========================================================
+   MÓDULO DA ÁREA ADMINISTRATIVA (100% client-side / localStorage)
+   -----------------------------------------------------------
+   IMPORTANTE:
+   - Este site não possui backend. O login abaixo impede apenas
+     acesso casual (não é segurança real: qualquer pessoa pode
+     ver a senha no código-fonte/DevTools).
+   - A moderação de mensagens só funciona dentro do MESMO
+     navegador/dispositivo do administrador. Mensagens enviadas
+     por visitantes em outros dispositivos ficam salvas no
+     navegador DELES, não chegam a este painel, pois não há
+     servidor central. Para moderação real entre dispositivos
+     diferentes é necessário um backend (Firebase, Supabase etc).
+   ========================================================= */
+(function(){
+  'use strict';
+
+  const LS_KEYS = {
+    auth: 'em_admin_auth',        // {user, pass}
+    content: 'em_admin_content',  // textos editáveis
+    heroImg: 'em_admin_hero_img', // base64 da foto do hero
+    bioImg: 'em_admin_bio_img',   // base64 da foto da biografia
+    family: 'em_admin_family',    // array de cards da família
+    gallery: 'em_admin_gallery',  // array de fotos da galeria
+    ytUrl:   'em_admin_yt_url',   // URL do vídeo YouTube
+    pending: 'em_admin_msg_pending',
+    approved: 'em_admin_msg_approved',
+    headerLogo: 'em_admin_header_logo', // base64 da logo do cabeçalho
+    footerLogo: 'em_admin_footer_logo', // base64 da logo minimalista do rodapé
+    footerSocial: 'em_admin_footer_social' // {instagram, whatsapp}
+  };
+  const SESSION_KEY = 'em_admin_session';
+
+  function readLS(key, fallback){
+    try{
+      const raw = localStorage.getItem(key);
+      return raw ? JSON.parse(raw) : fallback;
+    }catch(e){ return fallback; }
+  }
+  function writeLS(key, value){
+    try{ localStorage.setItem(key, JSON.stringify(value)); }catch(e){ console.error('[admin] Falha ao salvar', key, e); }
+  }
+
+  // ---------- DADOS PADRÃO (usados se localStorage estiver vazio) ----------
+  const DEFAULT_FAMILY = [
+    {img:'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop', name:'Pierre Marquette', relation:'Pai', quote:'Focar paisagens, inspirou Elena e enxergar as cores do mundo.', solo:false},
+    {img:'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop', name:'Clara Marquette', relation:'Mãe', quote:'Pontos clássicos, preencheu a infância de Elena com melodia e sensibilidade.', solo:false},
+    {img:'https://images.unsplash.com/photo-1539571696357-5a69c17a6716?w=200&h=200&fit=crop', name:'Louis Marquette', relation:'Irmão', quote:'Arquiteto e companheiro de aventuras, sempre apoiou os sonhos da irmã.', solo:true},
+    {img:'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop', name:'Marc Vance', relation:'Cônjuge', quote:'Parceiro de uma vida inteira, compartilhou com Elena o amor pelas artes e viagens.', solo:true},
+    {img:'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&fit=crop', name:'Lucas Vance', relation:'Filhos', quote:'Carrega no olhar a determinação da mãe e a paixão pela fotografia.', solo:false},
+    {img:'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&h=200&fit=crop', name:'Sofia Vance', relation:'Filhos', quote:'Seguiu os passos de Elena no teatro, transformando sentimentos em palavras.', solo:false},
+    {img:'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=200&h=200&fit=crop', name:'Leon Vance', relation:'Netos', quote:'O pequeno não, que iluminou os últimos anos de Elena com sorrisos.', solo:true}
+  ];
+
+  // ---------- DADOS PADRÃO DA GALERIA ----------
+  const DEFAULT_GALLERY = [
+    {img:'https://images.unsplash.com/photo-1490750967868-88df5691cc8a?w=1200&h=800&fit=crop&q=80', title:'Jardim de Verão', desc:'Paris, 1992 — Um dia perfeito entre flores e sonhos.'},
+    {img:'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1200&h=800&fit=crop&q=80', title:'Floresta Encantada', desc:'Os passeios que Elena tanto amava ao amanhecer.'},
+    {img:'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&h=800&fit=crop&q=80', title:'Montanhas e Silêncio', desc:'Retiro de inverno em 2015 — paz e contemplação.'},
+    {img:'https://images.unsplash.com/photo-1518998053901-5348d3961a04?w=1200&h=800&fit=crop&q=80', title:'À Beira do Mar', desc:'Verão em Lisboa — onde o amor ganhou forma.'},
+    {img:'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=1200&h=800&fit=crop&q=80', title:'Pôr do Sol Eterno', desc:'Cada fim de dia era um novo poema para ela.'}
+  ];
+  const DEFAULT_YT_URL = '';
+
+  function esc(str){
+    return String(str).replace(/[&<>"']/g,function(c){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  }
+
+  // ---------- AUTENTICAÇÃO ----------
+  function getAuth(){
+    return readLS(LS_KEYS.auth, {user:'adm123', pass:'adm123'});
+  }
+  function isLogged(){
+    return sessionStorage.getItem(SESSION_KEY) === '1';
+  }
+  function setLogged(v){
+    if(v) sessionStorage.setItem(SESSION_KEY, '1');
+    else sessionStorage.removeItem(SESSION_KEY);
+  }
+
+  // ---------- ELEMENTOS ----------
+  const el = {};
+  function cacheEls(){
+    el.openLoginLink = document.getElementById('admOpenLoginLink');
+    el.openLoginLinkWelcome = document.getElementById('admOpenLoginLinkWelcome');
+    el.loginOverlay = document.getElementById('admLoginOverlay');
+    el.loginForm = document.getElementById('admLoginForm');
+    el.loginUser = document.getElementById('admLoginUser');
+    el.loginPass = document.getElementById('admLoginPass');
+    el.loginError = document.getElementById('admLoginError');
+    el.loginCancel = document.getElementById('admLoginCancel');
+
+    el.navLogoImg = document.getElementById('navLogoImg');
+    el.headerLogoFile = document.getElementById('admHeaderLogoFile');
+    el.footerLogoImg = document.getElementById('footerLogoImg');
+    el.footerLogoFile = document.getElementById('admFooterLogoFile');
+    el.footerInstagramLink = document.getElementById('footerInstagramLink');
+    el.footerWhatsappLink = document.getElementById('footerWhatsappLink');
+    el.editSocialBtn = document.getElementById('admEditSocialBtn');
+
+    el.passOverlay = document.getElementById('admPassOverlay');
+    el.passForm = document.getElementById('admPassForm');
+    el.newUser = document.getElementById('admNewUser');
+    el.newPass = document.getElementById('admNewPass');
+    el.newPass2 = document.getElementById('admNewPass2');
+    el.passError = document.getElementById('admPassError');
+    el.passSuccess = document.getElementById('admPassSuccess');
+    el.passCancel = document.getElementById('admPassCancel');
+
+    el.toolbar = document.getElementById('admToolbar');
+    el.toggleEdit = document.getElementById('admToggleEdit');
+    el.openPending = document.getElementById('admOpenPending');
+    el.pendingBadge = document.getElementById('admPendingBadge');
+    el.changePass = document.getElementById('admChangePass');
+    el.logout = document.getElementById('admLogout');
+
+    el.pendingPanel = document.getElementById('admPendingPanel');
+    el.pendingList = document.getElementById('admPendingList');
+    el.closePending = document.getElementById('admClosePending');
+
+    el.heroFile = document.getElementById('admHeroFile');
+    el.familyGrid = document.getElementById('familyGrid');
+    el.galleryPanel = document.getElementById('admGalleryPanel');
+    el.closeGallery = document.getElementById('admCloseGallery');
+    el.openGallery = document.getElementById('admOpenGallery');
+    el.galleryThumbList = document.getElementById('admGalleryThumbList');
+    el.galleryImgUrl = document.getElementById('admGalleryImgUrl');
+    el.galleryCaption = document.getElementById('admGalleryCaption');
+    el.galleryDesc = document.getElementById('admGalleryDesc');
+    el.galleryAddBtn = document.getElementById('admGalleryAddBtn');
+    el.ytUrl = document.getElementById('admYtUrl');
+    el.ytSaveBtn = document.getElementById('admYtSaveBtn');
+    el.bioSingleWrap = document.getElementById('bioSingleWrap');
+    el.bioPhoto = document.getElementById('bioPhoto');
+    el.bioFile = document.getElementById('admBioFile');
+  }
+
+  // ---------- APLICAR TEXTOS SALVOS ----------
+  function applyContent(){
+    const content = readLS(LS_KEYS.content, {});
+    document.querySelectorAll('[data-key]').forEach(function(node){
+      const key = node.getAttribute('data-key');
+      if(content[key] !== undefined){
+        if(node.getAttribute('data-html') === '1') node.innerHTML = content[key];
+        else node.textContent = content[key];
+      }
+    });
+    const heroImg = readLS(LS_KEYS.heroImg, null);
+    if(heroImg){
+      const hero = document.querySelector('.hero');
+      if(hero) hero.style.setProperty('--custom-hero-bg', 'url(' + heroImg + ')');
+      if(hero){
+        const styleTag = document.createElement('style');
+        styleTag.textContent = '.hero::before{background-image:url(' + JSON.stringify(heroImg).replace(/"/g,'') + ') !important;}';
+        styleTag.id = 'admHeroStyleOverride';
+        const old = document.getElementById('admHeroStyleOverride');
+        if(old) old.remove();
+        document.head.appendChild(styleTag);
+      }
+      // A mesma foto de capa também é usada como fundo da tela de abertura (welcome-overlay)
+      const styleTagWelcome = document.createElement('style');
+      styleTagWelcome.textContent = '.welcome-overlay::before{background-image:url(' + JSON.stringify(heroImg).replace(/"/g,'') + ') !important;}';
+      styleTagWelcome.id = 'admWelcomeStyleOverride';
+      const oldWelcome = document.getElementById('admWelcomeStyleOverride');
+      if(oldWelcome) oldWelcome.remove();
+      document.head.appendChild(styleTagWelcome);
+    }
+    const bioImg = readLS(LS_KEYS.bioImg, null);
+    if(bioImg && el.bioPhoto){ el.bioPhoto.src = bioImg; }
+
+    const headerLogo = readLS(LS_KEYS.headerLogo, null);
+    if(headerLogo && el.navLogoImg){
+      el.navLogoImg.src = headerLogo;
+      el.navLogoImg.classList.add('has-logo');
+    }
+    const footerLogo = readLS(LS_KEYS.footerLogo, null);
+    if(footerLogo && el.footerLogoImg){
+      el.footerLogoImg.src = footerLogo;
+      el.footerLogoImg.classList.add('has-logo');
+    }
+    const footerSocial = readLS(LS_KEYS.footerSocial, {instagram:'', whatsapp:''});
+    if(el.footerInstagramLink) el.footerInstagramLink.href = footerSocial.instagram || '#';
+    if(el.footerWhatsappLink) el.footerWhatsappLink.href = footerSocial.whatsapp || '#';
+  }
+  function saveContentFromDOM(){
+    const content = {};
+    document.querySelectorAll('[data-key]').forEach(function(node){
+      const key = node.getAttribute('data-key');
+      content[key] = node.getAttribute('data-html') === '1' ? node.innerHTML : node.textContent;
+    });
+    writeLS(LS_KEYS.content, content);
+  }
+
+  // ---------- FAMÍLIA ----------
+  function getFamily(){ return readLS(LS_KEYS.family, DEFAULT_FAMILY); }
+  function saveFamily(arr){ writeLS(LS_KEYS.family, arr); }
+
+  function renderFamily(){
+    const arr = getFamily();
+    el.familyGrid.innerHTML = '';
+    arr.forEach(function(member, idx){
+      const card = document.createElement('div');
+      card.className = 'family-card reveal-target reveal' + (member.solo ? ' solo' : '');
+      card.innerHTML =
+        '<img src="' + esc(member.img) + '" alt="' + esc(member.name) + '">' +
+        '<h3 data-fam-key="name">' + esc(member.name) + '</h3>' +
+        '<p class="relation" data-fam-key="relation">' + esc(member.relation) + '</p>' +
+        '<p data-fam-key="quote">' + esc(member.quote) + '</p>' +
+        '<div class="adm-card-controls">' +
+          '<button type="button" class="adm-edit-fam" data-idx="' + idx + '">Editar</button>' +
+          '<button type="button" class="adm-danger adm-del-fam" data-idx="' + idx + '">Excluir</button>' +
+          '<label class="adm-upload-fam-label" style="cursor:pointer;">Foto<input type="file" accept="image/*" class="adm-upload-fam" data-idx="' + idx + '" style="display:none;"></label>' +
+        '</div>';
+      el.familyGrid.appendChild(card);
+    });
+    // botão adicionar
+    const addBtn = document.createElement('button');
+    addBtn.type = 'button';
+    addBtn.className = 'adm-add-card';
+    addBtn.id = 'admAddFamilyBtn';
+    addBtn.innerHTML = '<i class="fa-solid fa-plus"></i><span>Adicionar familiar</span>';
+    el.familyGrid.appendChild(addBtn);
+    bindFamilyEvents();
+  }
+
+  function bindFamilyEvents(){
+    el.familyGrid.querySelectorAll('.adm-edit-fam').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        const idx = parseInt(btn.getAttribute('data-idx'), 10);
+        const arr = getFamily();
+        const m = arr[idx];
+        const name = prompt('Nome:', m.name);
+        if(name === null) return;
+        const relation = prompt('Relação (ex: Filho, Esposo):', m.relation);
+        if(relation === null) return;
+        const quote = prompt('Frase/citação:', m.quote);
+        if(quote === null) return;
+        arr[idx] = { img: m.img, name: name.trim() || m.name, relation: relation.trim() || m.relation, quote: quote.trim() || m.quote };
+        saveFamily(arr);
+        renderFamily();
+      });
+    });
+    el.familyGrid.querySelectorAll('.adm-del-fam').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        const idx = parseInt(btn.getAttribute('data-idx'), 10);
+        if(!confirm('Excluir este familiar do mural?')) return;
+        const arr = getFamily();
+        arr.splice(idx, 1);
+        saveFamily(arr);
+        renderFamily();
+      });
+    });
+    el.familyGrid.querySelectorAll('.adm-upload-fam').forEach(function(input){
+      input.addEventListener('change', function(){
+        const idx = parseInt(input.getAttribute('data-idx'), 10);
+        const file = input.files && input.files[0];
+        if(!file) return;
+        const reader = new FileReader();
+        reader.onload = function(){
+          const arr = getFamily();
+          arr[idx].img = reader.result;
+          saveFamily(arr);
+          renderFamily();
+        };
+        reader.readAsDataURL(file);
+      });
+    });
+    const addBtn = document.getElementById('admAddFamilyBtn');
+    if(addBtn){
+      addBtn.addEventListener('click', function(){
+        const name = prompt('Nome do familiar:');
+        if(!name) return;
+        const relation = prompt('Relação (ex: Filho, Esposo, Irmã):') || '';
+        const quote = prompt('Frase/citação (opcional):') || '';
+        const arr = getFamily();
+        const soloAnswer = prompt('Exibir sozinho (centralizado)? Digite S para sim ou N para par:') || 'N';
+        arr.push({ img:'https://images.unsplash.com/photo-1502685104226-ee32379fefbe?w=200&h=200&fit=crop', name:name.trim(), relation:relation.trim(), quote:quote.trim(), solo: soloAnswer.trim().toUpperCase() === 'S' });
+        saveFamily(arr);
+        renderFamily();
+      });
+    }
+  }
+
+  // ---------- BIOGRAFIA — FOTO ÚNICA ----------
+  function bindBioPhotoUpload(){
+    if(!el.bioFile) return;
+    el.bioFile.addEventListener('change', function(){
+      const file = el.bioFile.files && el.bioFile.files[0];
+      if(!file) return;
+      const reader = new FileReader();
+      reader.onload = function(){
+        writeLS(LS_KEYS.bioImg, reader.result);
+        if(el.bioPhoto) el.bioPhoto.src = reader.result;
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  // ---------- LOGOS DO CABEÇALHO E RODAPÉ ----------
+  function bindLogoUploads(){
+    if(el.headerLogoFile){
+      el.headerLogoFile.addEventListener('change', function(){
+        const file = el.headerLogoFile.files && el.headerLogoFile.files[0];
+        if(!file) return;
+        const reader = new FileReader();
+        reader.onload = function(){
+          writeLS(LS_KEYS.headerLogo, reader.result);
+          if(el.navLogoImg){ el.navLogoImg.src = reader.result; el.navLogoImg.classList.add('has-logo'); }
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+    if(el.footerLogoFile){
+      el.footerLogoFile.addEventListener('change', function(){
+        const file = el.footerLogoFile.files && el.footerLogoFile.files[0];
+        if(!file) return;
+        const reader = new FileReader();
+        reader.onload = function(){
+          writeLS(LS_KEYS.footerLogo, reader.result);
+          if(el.footerLogoImg){ el.footerLogoImg.src = reader.result; el.footerLogoImg.classList.add('has-logo'); }
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+    if(el.editSocialBtn){
+      el.editSocialBtn.addEventListener('click', function(){
+        const current = readLS(LS_KEYS.footerSocial, {instagram:'', whatsapp:''});
+        const ig = prompt('Link do Instagram:', current.instagram || 'https://instagram.com/');
+        if(ig === null) return;
+        const wa = prompt('Link do WhatsApp (ex: https://wa.me/5511999999999):', current.whatsapp || 'https://wa.me/');
+        if(wa === null) return;
+        const social = { instagram: ig.trim(), whatsapp: wa.trim() };
+        writeLS(LS_KEYS.footerSocial, social);
+        if(el.footerInstagramLink) el.footerInstagramLink.href = social.instagram || '#';
+        if(el.footerWhatsappLink) el.footerWhatsappLink.href = social.whatsapp || '#';
+      });
+    }
+  }
+
+  // ---------- MODO EDIÇÃO (textos fixos via contentEditable) ----------
+  function applyEditableState(){
+    const editing = document.body.classList.contains('adm-editing');
+    document.querySelectorAll('[data-key]').forEach(function(node){
+      node.setAttribute('contenteditable', editing ? 'true' : 'false');
+    });
+  }
+  document.addEventListener('blur', function(e){
+    const t = e.target;
+    if(t && t.hasAttribute && t.hasAttribute('data-key') && document.body.classList.contains('adm-editing')){
+      saveContentFromDOM();
+    }
+  }, true);
+  // Evita que links editáveis (logo do cabeçalho, nomes das abas) naveguem
+  // acidentalmente enquanto o administrador está digitando dentro deles.
+  document.addEventListener('click', function(e){
+    if(!document.body.classList.contains('adm-editing')) return;
+    const link = e.target.closest('a[data-key]');
+    if(link){ e.preventDefault(); }
+  }, true);
+
+  // ---------- MENSAGENS: MODERAÇÃO ----------
+  function getPending(){ return readLS(LS_KEYS.pending, []); }
+  function savePending(arr){ writeLS(LS_KEYS.pending, arr); }
+  function getApproved(){ return readLS(LS_KEYS.approved, []); }
+  function saveApproved(arr){ writeLS(LS_KEYS.approved, arr); }
+
+  function submitForModeration(name, email, text){
+    const arr = getPending();
+    arr.push({ id: Date.now() + '_' + Math.random().toString(36).slice(2), name: name, email: email, text: text, date: new Date().toISOString() });
+    savePending(arr);
+    updatePendingBadge();
+  }
+
+  function updatePendingBadge(){
+    const count = getPending().length;
+    if(count > 0){
+      el.pendingBadge.textContent = count;
+      el.pendingBadge.classList.remove('hidden');
+    } else {
+      el.pendingBadge.classList.add('hidden');
+    }
+  }
+
+  function renderPendingList(){
+    const arr = getPending();
+    el.pendingList.innerHTML = '';
+    if(arr.length === 0){
+      el.pendingList.innerHTML = '<p class="adm-empty-note">Nenhuma mensagem pendente.</p>';
+      return;
+    }
+    arr.forEach(function(msg){
+      const d = new Date(msg.date);
+      const dd = String(d.getDate()).padStart(2,'0'), mm = String(d.getMonth()+1).padStart(2,'0'), yy = d.getFullYear();
+      const item = document.createElement('div');
+      item.className = 'adm-pending-item';
+      item.innerHTML =
+        '<div class="msg-head"><h4>' + esc(msg.name) + '</h4><span class="msg-date">' + dd+'/'+mm+'/'+yy + '</span></div>' +
+        '<p>' + esc(msg.text) + '</p>' +
+        '<div class="pending-actions">' +
+          '<button type="button" class="approve" data-id="' + msg.id + '">Aprovar</button>' +
+          '<button type="button" class="reject" data-id="' + msg.id + '">Rejeitar</button>' +
+        '</div>';
+      el.pendingList.appendChild(item);
+    });
+    el.pendingList.querySelectorAll('.approve').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        const id = btn.getAttribute('data-id');
+        const pending = getPending();
+        const idx = pending.findIndex(function(m){ return m.id === id; });
+        if(idx === -1) return;
+        const msg = pending[idx];
+        pending.splice(idx, 1);
+        savePending(pending);
+        const approved = getApproved();
+        approved.push(msg);
+        saveApproved(approved);
+        if(window.EternalMemory) window.EternalMemory.addMessage(msg.name, msg.text);
+        updatePendingBadge();
+        renderPendingList();
+      });
+    });
+    el.pendingList.querySelectorAll('.reject').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        if(!confirm('Rejeitar e excluir esta mensagem?')) return;
+        const id = btn.getAttribute('data-id');
+        const pending = getPending().filter(function(m){ return m.id !== id; });
+        savePending(pending);
+        updatePendingBadge();
+        renderPendingList();
+      });
+    });
+  }
+
+  function loadApprovedMessagesIntoMural(){
+    getApproved().forEach(function(msg){
+      if(window.EternalMemory) window.EternalMemory.addMessage(msg.name, msg.text);
+    });
+  }
+
+  // ---------- UI: LOGIN / LOGOUT / TOOLBAR ----------
+  function openOverlay(overlay){ overlay.classList.remove('hidden'); }
+  function closeOverlay(overlay){ overlay.classList.add('hidden'); }
+
+  function refreshAdminUI(){
+    const logged = isLogged();
+    el.toolbar.classList.toggle('hidden', !logged);
+    document.body.classList.toggle('adm-mode-active', logged);
+    if(!logged){
+      document.body.classList.remove('adm-editing');
+      applyEditableState();
+    }
+    updatePendingBadge();
+  }
+
+  function bindUIEvents(){
+    function openLoginHandler(e){
+      e.preventDefault();
+      if(isLogged()){
+        refreshAdminUI();
+        return;
+      }
+      el.loginError.textContent = '';
+      el.loginForm.reset();
+      openOverlay(el.loginOverlay);
+    }
+    el.openLoginLink.addEventListener('click', openLoginHandler);
+    if(el.openLoginLinkWelcome){ el.openLoginLinkWelcome.addEventListener('click', openLoginHandler); }
+    el.loginCancel.addEventListener('click', function(){ closeOverlay(el.loginOverlay); });
+    el.loginForm.addEventListener('submit', function(e){
+      e.preventDefault();
+      const auth = getAuth();
+      const user = el.loginUser.value.trim();
+      const pass = el.loginPass.value;
+      if(user === auth.user && pass === auth.pass){
+        setLogged(true);
+        closeOverlay(el.loginOverlay);
+        refreshAdminUI();
+      } else {
+        el.loginError.textContent = 'Login ou senha incorretos.';
+      }
+    });
+
+    el.toggleEdit.addEventListener('click', function(){
+      const active = document.body.classList.toggle('adm-editing');
+      el.toggleEdit.classList.toggle('active', active);
+      el.toggleEdit.textContent = active ? 'Desativar Edição' : 'Ativar Edição';
+      applyEditableState();
+    });
+
+    el.openPending.addEventListener('click', function(){
+      renderPendingList();
+      el.pendingPanel.classList.add('open');
+    });
+    el.closePending.addEventListener('click', function(){
+      el.pendingPanel.classList.remove('open');
+    });
+
+    el.changePass.addEventListener('click', function(){
+      const auth = getAuth();
+      el.newUser.value = auth.user;
+      el.newPass.value = '';
+      el.newPass2.value = '';
+      el.passError.textContent = '';
+      el.passSuccess.textContent = '';
+      openOverlay(el.passOverlay);
+    });
+    el.passCancel.addEventListener('click', function(){ closeOverlay(el.passOverlay); });
+    el.passForm.addEventListener('submit', function(e){
+      e.preventDefault();
+      el.passError.textContent = '';
+      const newUser = el.newUser.value.trim();
+      const p1 = el.newPass.value, p2 = el.newPass2.value;
+      if(!newUser){ el.passError.textContent = 'Informe um login.'; return; }
+      if(p1.length < 4){ el.passError.textContent = 'A senha deve ter ao menos 4 caracteres.'; return; }
+      if(p1 !== p2){ el.passError.textContent = 'As senhas não coincidem.'; return; }
+      writeLS(LS_KEYS.auth, { user: newUser, pass: p1 });
+      el.passSuccess.textContent = 'Senha alterada com sucesso.';
+      setTimeout(function(){ closeOverlay(el.passOverlay); }, 1200);
+    });
+
+    el.logout.addEventListener('click', function(){
+      setLogged(false);
+      document.body.classList.remove('adm-editing');
+      el.toggleEdit.classList.remove('active');
+      el.toggleEdit.textContent = 'Ativar Edição';
+      applyEditableState();
+      refreshAdminUI();
+    });
+
+    el.heroFile.addEventListener('change', function(){
+      const file = el.heroFile.files && el.heroFile.files[0];
+      if(!file) return;
+      const reader = new FileReader();
+      reader.onload = function(){
+        writeLS(LS_KEYS.heroImg, reader.result);
+        applyContent();
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  // ---------- GALERIA ----------
+  function getGallery(){ return readLS(LS_KEYS.gallery, DEFAULT_GALLERY); }
+  function saveGallery(arr){ writeLS(LS_KEYS.gallery, arr); }
+  function getYtUrl(){ return readLS(LS_KEYS.ytUrl, DEFAULT_YT_URL); }
+  function saveYtUrl(url){ writeLS(LS_KEYS.ytUrl, url); }
+
+  var galleryTimer = null;
+  var galleryCurrent = 0;
+  var galleryProgressStart = null;
+  var galleryProgressRaf = null;
+  var GALLERY_INTERVAL = 5000;
+
+  function ytVideoId(url){
+    if(!url) return null;
+    var m = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/);
+    return m ? m[1] : null;
+  }
+
+  function renderGalleryVideo(){
+    var frame = document.getElementById('galleryVideoFrame');
+    var placeholder = document.getElementById('galleryVideoPlaceholder');
+    if(!frame) return;
+    var url = getYtUrl();
+    var vid = ytVideoId(url);
+    var existing = frame.querySelector('iframe');
+    if(existing) existing.remove();
+    if(vid){
+      if(placeholder) placeholder.style.display = 'none';
+      var iframe = document.createElement('iframe');
+      iframe.src = 'https://www.youtube.com/embed/' + vid + '?rel=0&modestbranding=1';
+      iframe.setAttribute('allowfullscreen','');
+      iframe.setAttribute('allow','accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+      iframe.setAttribute('title','Vídeo em memória');
+      frame.appendChild(iframe);
+    } else {
+      if(placeholder) placeholder.style.display = 'flex';
+    }
+  }
+
+  function stopGallery(){
+    if(galleryTimer){ clearTimeout(galleryTimer); galleryTimer = null; }
+    if(galleryProgressRaf){ cancelAnimationFrame(galleryProgressRaf); galleryProgressRaf = null; }
+  }
+
+  function animateProgress(bar, duration, onDone){
+    galleryProgressStart = null;
+    bar.style.transition = 'none';
+    bar.style.width = '0%';
+    function step(ts){
+      if(!galleryProgressStart) galleryProgressStart = ts;
+      var pct = Math.min((ts - galleryProgressStart) / duration * 100, 100);
+      bar.style.width = pct + '%';
+      if(pct < 100){ galleryProgressRaf = requestAnimationFrame(step); }
+      else { onDone(); }
+    }
+    galleryProgressRaf = requestAnimationFrame(step);
+  }
+
+  function goToSlide(idx, slides, dots, bar){
+    var arr = getGallery();
+    if(!arr.length) return;
+    idx = ((idx % arr.length) + arr.length) % arr.length;
+    galleryCurrent = idx;
+    slides.forEach(function(s, i){ s.classList.toggle('active', i === idx); });
+    dots.forEach(function(d, i){ d.classList.toggle('active', i === idx); });
+    var counter = document.getElementById('galleryCounter');
+    if(counter) counter.textContent = (idx+1) + ' / ' + arr.length;
+    stopGallery();
+    animateProgress(bar, GALLERY_INTERVAL, function(){
+      goToSlide(galleryCurrent + 1, slides, dots, bar);
+    });
+  }
+
+  function renderGallery(){
+    var track = document.getElementById('galleryTrack');
+    var dotsEl = document.getElementById('galleryDots');
+    var bar = document.getElementById('galleryProgress');
+    var prevBtn = document.getElementById('galleryPrev');
+    var nextBtn = document.getElementById('galleryNext');
+    if(!track) return;
+    stopGallery();
+    track.innerHTML = '';
+    dotsEl.innerHTML = '';
+    var arr = getGallery();
+    if(!arr.length){
+      track.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;color:var(--muted);font-size:.9rem;letter-spacing:1px;">Nenhuma foto na galeria.</div>';
+      return;
+    }
+    var slides = [];
+    var dots = [];
+    arr.forEach(function(photo, i){
+      var slide = document.createElement('div');
+      slide.className = 'gallery-slide';
+      slide.innerHTML = '<img src="' + esc(photo.img) + '" alt="' + esc(photo.title||'') + '" loading="lazy">' +
+        '<div class="gallery-slide-overlay"></div>' +
+        '<div class="gallery-caption"><h4>' + esc(photo.title||'') + '</h4>' +
+        (photo.desc ? '<p>' + esc(photo.desc) + '</p>' : '') + '</div>';
+      track.appendChild(slide);
+      slides.push(slide);
+      var dot = document.createElement('button');
+      dot.className = 'gallery-dot';
+      dot.setAttribute('aria-label', 'Foto ' + (i+1));
+      dot.addEventListener('click', function(){ goToSlide(i, slides, dots, bar); });
+      dotsEl.appendChild(dot);
+      dots.push(dot);
+    });
+    if(prevBtn){
+      prevBtn.onclick = function(){ goToSlide(galleryCurrent - 1, slides, dots, bar); };
+    }
+    if(nextBtn){
+      nextBtn.onclick = function(){ goToSlide(galleryCurrent + 1, slides, dots, bar); };
+    }
+    galleryCurrent = 0;
+    goToSlide(0, slides, dots, bar);
+    renderGalleryVideo();
+  }
+
+  function renderAdminGalleryThumbs(){
+    if(!el.galleryThumbList) return;
+    var arr = getGallery();
+    el.galleryThumbList.innerHTML = '';
+    if(!arr.length){
+      el.galleryThumbList.innerHTML = '<p class="adm-empty-note">Galeria vazia. Adicione fotos abaixo.</p>';
+      return;
+    }
+    arr.forEach(function(photo, i){
+      var item = document.createElement('div');
+      item.className = 'adm-gallery-thumb';
+      item.innerHTML =
+        '<img src="' + esc(photo.img) + '" alt="">' +
+        '<div class="adm-gallery-thumb-info">' +
+          '<input type="text" value="' + esc(photo.title||'') + '" data-gidx="' + i + '" data-gfield="title" placeholder="Título">' +
+          '<div class="thumb-sub">' + esc(photo.img.length > 48 ? photo.img.slice(0,45)+'…' : photo.img) + '</div>' +
+        '</div>' +
+        '<button type="button" data-del="' + i + '">✕</button>';
+      el.galleryThumbList.appendChild(item);
+    });
+    el.galleryThumbList.querySelectorAll('input[data-gidx]').forEach(function(inp){
+      inp.addEventListener('blur', function(){
+        var idx = parseInt(inp.getAttribute('data-gidx'),10);
+        var field = inp.getAttribute('data-gfield');
+        var arr2 = getGallery();
+        arr2[idx][field] = inp.value.trim();
+        saveGallery(arr2);
+        renderGallery();
+      });
+    });
+    el.galleryThumbList.querySelectorAll('button[data-del]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var idx = parseInt(btn.getAttribute('data-del'),10);
+        if(!confirm('Remover esta foto da galeria?')) return;
+        var arr2 = getGallery();
+        arr2.splice(idx, 1);
+        saveGallery(arr2);
+        renderGallery();
+        renderAdminGalleryThumbs();
+      });
+    });
+  }
+
+  function bindGalleryAdmin(){
+    if(el.closeGallery){
+      el.closeGallery.addEventListener('click', function(){
+        el.galleryPanel.classList.remove('open');
+      });
+    }
+    if(el.openGallery){
+      el.openGallery.addEventListener('click', function(){
+        var stored = getYtUrl();
+        if(el.ytUrl) el.ytUrl.value = stored || '';
+        renderAdminGalleryThumbs();
+        el.galleryPanel.classList.add('open');
+      });
+    }
+    if(el.galleryAddBtn){
+      el.galleryAddBtn.addEventListener('click', function(){
+        var url = el.galleryImgUrl.value.trim();
+        if(!url){ alert('Informe a URL da imagem.'); return; }
+        var arr = getGallery();
+        arr.push({ img: url, title: el.galleryCaption.value.trim(), desc: el.galleryDesc.value.trim() });
+        saveGallery(arr);
+        el.galleryImgUrl.value = '';
+        el.galleryCaption.value = '';
+        el.galleryDesc.value = '';
+        renderGallery();
+        renderAdminGalleryThumbs();
+      });
+    }
+    if(el.ytSaveBtn){
+      el.ytSaveBtn.addEventListener('click', function(){
+        var url = el.ytUrl.value.trim();
+        if(url && !ytVideoId(url)){ alert('URL do YouTube inválida. Use o formato https://www.youtube.com/watch?v=XXXXXXXXXXX'); return; }
+        saveYtUrl(url);
+        renderGalleryVideo();
+        el.galleryPanel.classList.remove('open');
+      });
+    }
+  }
+
+  // ---------- INIT ----------
+  function init(){
+    cacheEls();
+    applyContent();
+    renderFamily();
+    renderGallery();
+    bindGalleryAdmin();
+    bindBioPhotoUpload();
+    bindLogoUploads();
+    loadApprovedMessagesIntoMural();
+    bindUIEvents();
+    refreshAdminUI();
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+
+  window.AdminApp = { submitForModeration: submitForModeration };
+})();
+</script>
+<!-- ===== MÚSICA DE FUNDO (ativada apenas ao vir da página de entrada) =====
+     Não faz parte da estrutura visual do site; apenas consome o gatilho
+     deixado pela intro.html após o clique do visitante em "Entrar no Memorial".
+     Inclui um botão discreto de fallback, que só aparece se o navegador
+     bloquear a reprodução automática mesmo após o clique na porta de entrada. -->
+<audio id="emBgMusic" loop preload="none" style="display:none"></audio>
+<button type="button" id="emBgMusicFallback" aria-label="Tocar música de fundo" style="display:none;position:fixed;bottom:90px;right:20px;z-index:3500;width:46px;height:46px;border-radius:50%;border:1px solid var(--gold);background:rgba(7,7,7,0.85);color:var(--gold);font-size:1.1rem;cursor:pointer;backdrop-filter:blur(6px);box-shadow:0 4px 18px rgba(0,0,0,0.4);transition:.3s;">
+  <i class="fa-solid fa-music"></i>
+</button>
+<script>
+(function(){
+  'use strict';
+  try{
+    if(sessionStorage.getItem('em_music_should_play') !== '1') return;
+    sessionStorage.removeItem('em_music_should_play');
+
+    var raw = localStorage.getItem('em_bg_music_src');
+    if(!raw) return;
+    var src = raw;
+    try{ var parsed = JSON.parse(raw); if(typeof parsed === 'string') src = parsed; }catch(e){ /* valor já é string simples */ }
+    if(!src) return;
+
+    var audio = document.getElementById('emBgMusic');
+    var fallbackBtn = document.getElementById('emBgMusicFallback');
+    audio.src = src;
+
+    function showFallback(){
+      fallbackBtn.style.display = 'flex';
+      fallbackBtn.style.alignItems = 'center';
+      fallbackBtn.style.justifyContent = 'center';
+    }
+
+    var playPromise = audio.play();
+    if(playPromise && playPromise.catch){
+      playPromise.catch(function(err){
+        // O navegador ainda bloqueou o autoplay mesmo após o clique na porta
+        // de entrada (política mais restritiva). Mostra um botão discreto
+        // para o visitante ativar a música manualmente — este SIM é um
+        // gesto direto do usuário, então sempre funciona.
+        console.warn('[música de fundo] autoplay bloqueado pelo navegador:', err);
+        showFallback();
+      });
+    }
+
+    fallbackBtn.addEventListener('click', function(){
+      audio.play().catch(function(err){ console.warn('[música de fundo] falha ao tocar manualmente:', err); });
+      fallbackBtn.style.display = 'none';
+    });
+  }catch(err){
+    console.warn('[música de fundo] falha ao iniciar reprodução:', err);
+  }
+})();
+</script>
+
+</body>
+</html>
