@@ -5,6 +5,63 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Eternal Memory — In Memoriam de Elena Marquette</title>
 <meta name="description" content="Memorial eterno em homenagem a Elena Marquette. Acenda uma vela e deixe sua mensagem.">
+
+<!-- ================= FIREBASE (banco de dados compartilhado) ================= -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
+  import {
+    getFirestore, doc, onSnapshot, setDoc
+  } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDkAmbfYx9obmjSsKPAP51Bt89uBdiqcrw",
+    authDomain: "memorial-501921-649a9.firebaseapp.com",
+    projectId: "memorial-501921-649a9",
+    storageBucket: "memorial-501921-649a9.firebasestorage.app",
+    messagingSenderId: "246983220294",
+    appId: "1:246983220294:web:df7fa5d6c77d81dddc3e47",
+    measurementId: "G-3L4EBC2XF6"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  const configRef = doc(db, 'site', 'config');
+
+  // API global simples usada pelo resto do site (scripts normais, não-módulo)
+  // para ler/escrever dados que ficam sincronizados em tempo real via Firestore
+  // entre TODOS os visitantes/dispositivos.
+  window.SiteConfigDB = {
+    ready: false,
+    data: {},
+    _listeners: [],
+    get(key, fallback){
+      const v = this.data[key];
+      return (v === undefined || v === null) ? fallback : v;
+    },
+    set(key, value){
+      this.data[key] = value; // atualização otimista local (feedback instantâneo)
+      setDoc(configRef, { [key]: value }, { merge: true }).catch(function(e){
+        console.error('[firebase] Falha ao salvar "' + key + '":', e);
+      });
+    },
+    onUpdate(cb){
+      this._listeners.push(cb);
+      if(this.ready) cb();
+    }
+  };
+
+  onSnapshot(configRef, function(snap){
+    window.SiteConfigDB.data = snap.exists() ? snap.data() : {};
+    window.SiteConfigDB.ready = true;
+    window.SiteConfigDB._listeners.forEach(function(cb){
+      try{ cb(); }catch(e){ console.error('[firebase] erro em listener', e); }
+    });
+  }, function(err){
+    console.error('[firebase] Falha ao conectar no Firestore:', err);
+  });
+</script>
+<!-- =============================================================== -->
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -977,7 +1034,12 @@ body.adm-editing .welcome-overlay .adm-hero-upload{
     requestAnimationFrame(step);
   }
 
-  function addCandle(name){
+  // IDs das velas já renderizadas nesta página, para não duplicar quando o
+  // Firestore reenviar a lista completa (própria vela local + velas de outros
+  // visitantes chegando em tempo real).
+  const renderedCandleIds = new Set();
+
+  function addCandle(name, persist){
     // Se o vídeo já tentou e definitivamente falhou, usa CSS direto (sem lag).
     // Se ainda está carregando ou já carregou com sucesso, usa vídeo com fallback por vela.
     const candle = (videoReadyResolved && !videoReady) ? createCssCandle(name) : createVideoCandle(name);
@@ -987,6 +1049,28 @@ body.adm-editing .welcome-overlay .adm-hero-upload{
     });
     candleCount++;
     animateCounter();
+
+    if(persist !== false && window.SiteConfigDB){
+      const arr = window.SiteConfigDB.get('candles', []).slice();
+      const entry = { id: Date.now() + '_' + Math.random().toString(36).slice(2), name: name || '', ts: Date.now() };
+      renderedCandleIds.add(entry.id);
+      arr.push(entry);
+      window.SiteConfigDB.set('candles', arr);
+    }
+  }
+
+  // Sincroniza velas acesas por QUALQUER visitante (inclusive as de antes,
+  // ao carregar a página) e novas velas chegando em tempo real de outras pessoas.
+  if(window.SiteConfigDB){
+    window.SiteConfigDB.onUpdate(function(){
+      const arr = window.SiteConfigDB.get('candles', []);
+      arr.forEach(function(entry){
+        if(!renderedCandleIds.has(entry.id)){
+          renderedCandleIds.add(entry.id);
+          addCandle(entry.name, false);
+        }
+      });
+    });
   }
 
   function showStatus(msg, ms){
@@ -1219,14 +1303,14 @@ body.adm-editing .welcome-overlay .adm-hero-upload{
   };
   const SESSION_KEY = 'em_admin_session';
 
+  // Agora os dados vêm do Firestore (window.SiteConfigDB), não mais do localStorage.
+  // Mantemos os mesmos nomes de função (readLS/writeLS) para não precisar alterar
+  // todo o resto do código abaixo, que já usa esse padrão em toda parte.
   function readLS(key, fallback){
-    try{
-      const raw = localStorage.getItem(key);
-      return raw ? JSON.parse(raw) : fallback;
-    }catch(e){ return fallback; }
+    return window.SiteConfigDB.get(key, fallback);
   }
   function writeLS(key, value){
-    try{ localStorage.setItem(key, JSON.stringify(value)); }catch(e){ console.error('[admin] Falha ao salvar', key, e); }
+    window.SiteConfigDB.set(key, value);
   }
 
   // ---------- DADOS PADRÃO (usados se localStorage estiver vazio) ----------
@@ -1621,8 +1705,11 @@ body.adm-editing .welcome-overlay .adm-hero-upload{
     });
   }
 
+  const renderedApprovedIds = new Set();
   function loadApprovedMessagesIntoMural(){
     getApproved().forEach(function(msg){
+      if(renderedApprovedIds.has(msg.id)) return; // já está no mural, não duplica
+      renderedApprovedIds.add(msg.id);
       if(window.EternalMemory) window.EternalMemory.addMessage(msg.name, msg.text);
     });
   }
@@ -1929,17 +2016,35 @@ body.adm-editing .welcome-overlay .adm-hero-upload{
   }
 
   // ---------- INIT ----------
-  function init(){
+  // bindEventsOnce: liga os listeners de clique/upload/etc — só deve rodar 1 vez.
+  function bindEventsOnce(){
     cacheEls();
-    applyContent();
-    renderFamily();
-    renderGallery();
     bindGalleryAdmin();
     bindBioPhotoUpload();
     bindLogoUploads();
-    loadApprovedMessagesIntoMural();
     bindUIEvents();
+  }
+
+  // renderAll: (re)desenha tudo a partir do que está em window.SiteConfigDB.
+  // Roda na carga inicial E toda vez que o Firestore avisar de uma mudança
+  // (feita por você mesma em outra aba, ou por qualquer outra pessoa em
+  // outro dispositivo) — é isso que faz o conteúdo ficar sincronizado.
+  function renderAll(){
+    applyContent();
+    renderFamily();
+    renderGallery();
+    loadApprovedMessagesIntoMural();
+    renderPendingList();
     refreshAdminUI();
+  }
+
+  function init(){
+    bindEventsOnce();
+    if(window.SiteConfigDB){
+      window.SiteConfigDB.onUpdate(renderAll);
+    } else {
+      renderAll();
+    }
   }
 
   if(document.readyState === 'loading'){
